@@ -1,16 +1,19 @@
 import "./App.css";
-import Home from "./App/Pages/Home/Home";
-import Footer from "./components/Footer"
+import { ThemeProvider } from "./App/Ui/ThemeContext";
+import Navbar from "./components/Navbar";
+import Home from "./App/Home/Home";
+    import Footer from "./components/Footer"
 
 function App() {
   return (
-    <div>
+    <ThemeProvider>
+      <Navbar />
+      {/* Main content */}
       <main>
-      <Home />
+        <Home />
       </main>
       <Footer/>
-    </div>
-
+    </ThemeProvider>
   );
 }
 
