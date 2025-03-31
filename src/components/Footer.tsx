@@ -1,7 +1,4 @@
-import "@fortawesome/fontawesome-free/css/all.min.css";
 import characterImg from "../assets/image.webp"; // Import Local Image
-
-
 
 export default function Footer() {
   return (
@@ -18,35 +15,41 @@ export default function Footer() {
           </div>
 
           <p className="text-gray-400 text-sm text-center md:text-end md:w-1/2">
-            Fabletastic.com is the world's largest collection of fairytales, fables, and folktales.  
-            Discover thousands of classic tales plus new ones from today's best storytellers.  
-            Join now to publish your own tales, get feedback from readers, and enter writing competitions.
+            Fabletastic.com is the world's largest collection of fairytales,
+            fables, and folktales. Discover thousands of classic tales plus new
+            ones from today's best storytellers. Join now to publish your own
+            tales, get feedback from readers, and enter writing competitions.
           </p>
         </div>
-        
 
         {/* Signup Form & Image */}
 
         <div className=" flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="mt-[100px] text-gray-500 text-sm text-center">
-          © 2025 Sooper Books. All rights reserved.
-          <div className="mt-6 text-center md:text-">
-          <p className="text-gray-400 justify-center items-center">Follow us on:</p>
-          <div className="flex justify-center md:justify-center gap-4 mt-2">
-            <a href="#" className="text-pink-500 text-2xl hover:text-white">
-              <i className="fab fa-facebook"></i>
-            </a>
-            <a href="#" className="text-pink-500 text-2xl hover:text-white">
-              <i className="fab fa-pinterest"></i>
-            </a>
-            <a href="#" className="text-pink-500 text-2xl hover:text-white">
-              <i className="fab fa-twitter"></i>
-            </a>
+          <div className="mt-[100px] text-gray-500 text-sm text-center">
+            © 2025 Sooper Books. All rights reserved.
+            <div className="mt-6 text-center md:text-">
+              <p className="text-gray-400 justify-center items-center">
+                Follow us on:
+              </p>
+              <div className="flex justify-center md:justify-center gap-4 mt-2">
+                <a href="#" className="text-pink-500 text-2xl hover:text-white">
+                  <i className="fab fa-facebook"></i>
+                </a>
+                <a href="#" className="text-pink-500 text-2xl hover:text-white">
+                  <i className="fab fa-pinterest"></i>
+                </a>
+                <a href="#" className="text-pink-500 text-2xl hover:text-white">
+                  <i className="fab fa-twitter"></i>
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
-        </div>
           {/* Character Image */}
-          <img src={characterImg} alt="Character" className="w-32 md:w-44 rounded-lg" />
+          <img
+            src={characterImg}
+            alt="Character"
+            className="w-32 md:w-44 rounded-lg"
+          />
 
           {/* Sign-up Form */}
           <form className="max-w-md w-full">
@@ -54,7 +57,8 @@ export default function Footer() {
               <h3>Sign in</h3>
             </label>
             <p className="text-gray-400 text-sm">
-              If you want your children to be intelligent, read them fairy tales.
+              If you want your children to be intelligent, read them fairy
+              tales.
             </p>
 
             <div className="relative mt-3">
@@ -70,18 +74,13 @@ export default function Footer() {
               >
                 Subscribe
               </button>
-
             </div>
             <p className="text-gray-400 mt-2 text-sm">
-            If you want them to be more intelligent, read them more fairy tales.            </p>
+              If you want them to be more intelligent, read them more fairy
+              tales.{" "}
+            </p>
           </form>
         </div>
-
-        {/* Social Media Links */}
-      
-
-        {/* Footer */}
-       
       </div>
     </div>
   );
