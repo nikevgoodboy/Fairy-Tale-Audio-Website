@@ -150,7 +150,7 @@ export default function Navbar() {
                   {item.name}
                 </a>
                 {index < NavItems.length - 1 && (
-                  <span className="text-[#FF0E4D] text-3xl">|</span>
+                  <span className="text-[#FF0E4D] text-3xl">{"|"}</span>
                 )}
               </li>
             ))}
