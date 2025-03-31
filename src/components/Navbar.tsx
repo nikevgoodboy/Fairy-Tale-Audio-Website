@@ -160,7 +160,7 @@ export default function Navbar() {
               <div className="relative">
                 <input
                   type="search"
-                  className="w-full bg-transparent border-2 border-gray-800 text-sm text-white pl-10 pr-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full bg-transparent border-2 border-[#FF0E4D] text-sm text-white pl-10 pr-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF0E4D] focus:border-[#FF0E4D]"
                   placeholder="Search..."
                   aria-label="Search"
                   value={searchQuery}
@@ -175,7 +175,7 @@ export default function Navbar() {
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"
-                    className="w-5 h-5 text-gray-800 fill-current"
+                    className="w-5 h-5 text-[#FF0E4D] fill-current"
                     aria-hidden="true"
                   >
                     <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
