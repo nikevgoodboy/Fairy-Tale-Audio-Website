@@ -1,5 +1,7 @@
 export default function Hero() {
-    return (
-        <section><p>Hero section</p></section>
-    )
+  return (
+    <section>
+      <p>Hero section Favorite</p>
+    </section>
+  );
 }
