@@ -3,17 +3,27 @@ import { ThemeProvider } from "./App/Ui/ThemeContext";
 import Navbar from "./components/Navbar";
 import Home from "./App/Pages/Home/Home";
 import Footer from "./components/Footer";
-// import Favorite from "./App/Pages/Favorite/Favorite";
+import Favorite from "./App/Pages/Favorite/Favorite";
+import { Routes, Route, Link } from "react-router-dom"; // ✅ Fix this import
 
 function App() {
   return (
     <ThemeProvider>
       <Navbar />
+      {/* Navigation Links */}
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/favorite">Favorite</Link>
+      </nav>
+
       {/* Main content */}
       <main>
-        <Home />
-        {/* <Favorite /> */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/favorite" element={<Favorite />} />
+        </Routes>
       </main>
+
       <Footer />
     </ThemeProvider>
   );
