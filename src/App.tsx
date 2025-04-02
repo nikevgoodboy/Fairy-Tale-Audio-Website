@@ -3,9 +3,8 @@ import { ThemeProvider } from "./App/Ui/ThemeContext";
 import Navbar from "./components/Navbar";
 import Home from "./App/Pages/Home/Home";
 import Footer from "./components/Footer";
-import Favorite from "./App/Pages/Favorite/Favorite";
-import Card from "./components/Card/Card"; // ✅ Fix this import
-import { Routes, Route, Link } from "react-router-dom"; // ✅ Fix this import
+import Button from "./components/button";
+import { Link } from "react-router-dom";
 
 function App() {
   return (
@@ -19,11 +18,9 @@ function App() {
 
       {/* Main content */}
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/favorite" element={<Favorite />} />
-        </Routes>
-        <Card />
+        <Home />
+        <Button />
+        {/* Add other components or content here */}
       </main>
 
       <Footer />
