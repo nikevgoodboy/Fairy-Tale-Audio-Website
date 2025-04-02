@@ -1,15 +1,15 @@
 import "./App.css";
-import { ThemeProvider } from "./App/Ui/ThemeContext";
+import { ThemeProvider } from "./App/Ui/ThemeContext"; // Ensure the correct path
 import Navbar from "./components/Navbar";
-import Home from "./App/Pages/Home/Home";
+import Home from "./App/Pages/Home/Home"; // Ensure this path is correct
 import Footer from "./components/Footer";
-import Button from "./components/button";
-import { Link } from "react-router-dom";
+import { Link, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <ThemeProvider>
       <Navbar />
+
       {/* Navigation Links */}
       <nav>
         <Link to="/">Home</Link>
@@ -18,9 +18,10 @@ function App() {
 
       {/* Main content */}
       <main>
-        <Home />
-        <Button />
-        {/* Add other components or content here */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* Add other routes here */}
+        </Routes>
       </main>
 
       <Footer />
