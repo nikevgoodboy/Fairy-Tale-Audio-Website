@@ -1,7 +1,16 @@
-export default function HeroSection() {
+export default function Hero() {
   return (
-    <div className="w-full min-h-screen flex items-center justify-center">
-      <h1 className="text-7xl font-bold">This is Story Detail</h1>
-    </div>
+    <section>
+      <div className=" from-teal-100 to-lime-100 p-8 rounded-lg ">
+        <div className="text-center">
+          <h1 className="text-5xl font-extrabold text-withe mb-2">
+            FAIRY TALES
+          </h1>
+          <h1 className="text-3xl font-semibold text-pink-600 mb-4">
+            Tales for Young
+          </h1>
+        </div>
+      </div>
+    </section>
   );
 }

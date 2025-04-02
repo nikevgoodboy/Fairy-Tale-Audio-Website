@@ -1,4 +1,5 @@
 import characterImg from "../assets/image.webp"; // Import Local Image
+import SocialIconsFooter from "./socialiconsFooter/socialiconsFooter";
 
 export default function Footer() {
   return (
@@ -31,17 +32,7 @@ export default function Footer() {
               <p className="text-gray-400 justify-center items-center">
                 Follow us on:
               </p>
-              <div className="flex justify-center md:justify-center gap-4 mt-2">
-                <a href="#" className="text-pink-500 text-2xl hover:text-white">
-                  <i className="fab fa-facebook"></i>
-                </a>
-                <a href="#" className="text-pink-500 text-2xl hover:text-white">
-                  <i className="fab fa-pinterest"></i>
-                </a>
-                <a href="#" className="text-pink-500 text-2xl hover:text-white">
-                  <i className="fab fa-twitter"></i>
-                </a>
-              </div>
+              <SocialIconsFooter />
             </div>
           </div>
           {/* Character Image */}

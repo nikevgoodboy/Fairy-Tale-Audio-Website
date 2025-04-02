@@ -21,7 +21,6 @@ function App() {
           <Route path="/storydetail" element={<StoryDetail />} />
         </Routes>
       </main>
-
       <Footer />
     </ThemeProvider>
   );
