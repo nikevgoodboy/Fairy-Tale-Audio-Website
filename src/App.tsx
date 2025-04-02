@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import Home from "./App/Pages/Home/Home"; // Ensure this path is correct
 import Footer from "./components/Footer";
 import { Link, Routes, Route } from "react-router-dom";
+import Favorite from "./App/Pages/Favorite/Favorite";
+import StoryDetail from "./App/Pages/story-detail/story-detail";
 
 function App() {
   return (
@@ -20,7 +22,8 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* Add other routes here */}
+          <Route path="/favorite" element={<Favorite />} />
+          <Route path="/storydetail" element={<StoryDetail />} />
         </Routes>
       </main>
 

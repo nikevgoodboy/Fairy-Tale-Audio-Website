@@ -16,9 +16,9 @@ interface NavItem {
 }
 
 const NavItems: NavItem[] = [
-  { name: "HOME", link: "#" },
-  { name: "STORIES", link: "#" },
-  { name: "FAVORITE", link: "#" },
+  { name: "HOME", link: "/" },
+  { name: "STORIES", link: "/storydetail" },
+  { name: "FAVORITE", link: "favorite" },
 ];
 
 // Mock search suggestions data - in a real app, this would come from an API
