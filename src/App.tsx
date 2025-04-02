@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./App/Pages/Home/Home";
 import Footer from "./components/Footer";
 import Favorite from "./App/Pages/Favorite/Favorite";
+import Card from "./components/Card/Card"; // ✅ Fix this import
 import { Routes, Route, Link } from "react-router-dom"; // ✅ Fix this import
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/favorite" element={<Favorite />} />
         </Routes>
+        <Card />
       </main>
 
       <Footer />
