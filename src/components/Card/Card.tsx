@@ -3,8 +3,23 @@ import image1 from "../../assets/images1.webp";
 import image2 from "../../assets/images2.webp";
 import image3 from "../../assets/images3.webp";
 import image4 from "../../assets/images4.webp";
+import imgae5 from "../../assets/images5.webp";
+import imgae6 from "../../assets/images6.webp";
+import imgae7 from "../../assets/images7.webp";
+import imgae8 from "../../assets/imgae8.webp";
+import imgae9 from "../../assets/imgea9.webp";
 
-const imagesArray = [image1, image2, image3, image4];
+const imagesArray = [
+  image1,
+  image2,
+  image3,
+  image4,
+  imgae5,
+  imgae6,
+  imgae7,
+  imgae8,
+  imgae9,
+];
 
 // Define the props interface for the Card component
 interface CardProps {
@@ -17,12 +32,12 @@ interface CardProps {
 // Card component with props
 function CardComponent({ title, description, image, alt }: CardProps) {
   return (
-    <div className="max-w-[300px] bg-white border border-pink-500 hover:border-blue-500 rounded-lg shadow-sm dark:bg-gray-800 transition-transform transform hover:scale-102">
+    <div className="max-w-[300px] bg-white border border-pink-500 hover:border-blue-500 rounded-lg shadow-sm dark:bg-gray-800 transition-transform transform hover:scale-101 gap-4">
       <div className="relative">
         <img
           src={image}
           alt={alt}
-          className="w-full h-[340px] object-fit rounded-t-lg"
+          className="w-full h-[300px] object-fit rounded-t-lg"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50"></div>
         <div className="absolute bottom-2 left-2 text-white font-semibold text-sm">
@@ -42,9 +57,9 @@ function CardComponent({ title, description, image, alt }: CardProps) {
               fill="currentColor"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               />
             </svg>
           </div>
@@ -85,10 +100,66 @@ export default function Card() {
       image: image4,
       alt: "Card 4 Image",
     },
+    {
+      title: "Card 4 Title",
+      description:
+        "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
+      image: imgae5,
+      alt: "Card 4 Image",
+    },
+    {
+      title: "Card 4 Title",
+      description:
+        "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
+      image: imgae6,
+      alt: "Card 4 Image",
+    },
+    {
+      title: "Card 4 Title",
+      description:
+        "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
+      image: imgae7,
+      alt: "Card 4 Image",
+    },
+    {
+      title: "Card 4 Title",
+      description:
+        "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
+      image: imgae5,
+      alt: "Card 4 Image",
+    },
+    {
+      title: "Card 4 Title",
+      description:
+        "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
+      image: imgae7,
+      alt: "Card 4 Image",
+    },
+    {
+      title: "Card 4 Title",
+      description:
+        "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
+      image: imgae9,
+      alt: "Card 4 Image",
+    },
+    {
+      title: "Card 2 Title",
+      description:
+        "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
+      image: image2,
+      alt: "Card 2 Image",
+    },
+    {
+      title: "Card 3 Title",
+      description:
+        "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
+      image: image3,
+      alt: "Card 3 Image",
+    },
   ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-2">
+    <div className="flex flex-wrap justify-center gap-4 pb-6">
       {cardData.map((card, index) => (
         <CardComponent
           key={index}
