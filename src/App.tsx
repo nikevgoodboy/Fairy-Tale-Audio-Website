@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
 import Favorite from "./App/Pages/Favorite/Favorite";
 import StoryDetail from "./App/Pages/story-detail/story-detail";
+// i dont now
 
 function App() {
   return (
