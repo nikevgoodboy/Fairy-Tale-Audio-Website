@@ -5,7 +5,7 @@ import Home from "./App/Pages/Home/Home"; // Ensure this path is correct
 import Footer from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
 import Favorite from "./App/Pages/Favorite/Favorite";
-import StoryDetail from "./App/Pages/story-detail/story-detail";
+import Story from "./App/Pages/story-detail/story";
 // i dont now
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/favorite" element={<Favorite />} />
-          <Route path="/storydetail" element={<StoryDetail />} />
+          <Route path="/story" element={<Story />} />
         </Routes>
       </main>
       <Footer />

@@ -1,6 +1,9 @@
 export default function HeroSection() {
-  const vectorImage =
+  const DefaultImage =
     "https://media.istockphoto.com/id/946853684/photo/mom-and-children-reading-book.jpg?s=612x612&w=0&k=20&c=-X-msnp69ziQbgm2Fqs9PVZldjGGpkmx5t2Vnabe5Hk=";
+
+  const HoverImage =
+    "https://familyintale.com/wp-content/uploads/2023/09/Importance-of-Fairy-Tales-in-the-Parent-Child-Relationship.jpg";
   return (
     <section className="min-h-screen flex items-center py-8 md:py-16 px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto">
@@ -19,15 +22,32 @@ export default function HeroSection() {
               families closer together.
             </p>
 
-            <div>
-              <a href="/">
-                <button className="bg-[#FF0E4D] hover:bg-gray-800 text-white font-medium py-2 px-5 sm:py-3 sm:px-6 rounded-md transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95 cursor-pointer">
-                  Explore Stories
+            <div className="inline-block">
+              <a href="/" className="inline-block">
+                <button
+                  className="bg-[#FF0E4D] hover:bg-gray-800 text-white font-medium py-2 px-5 sm:py-3 sm:px-6 rounded-md transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 cursor-pointer flex items-center gap-2"
+                  aria-label="Explore Stories"
+                >
+                  <span>Explore Stories</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-4 w-4"
+                  >
+                    <path d="m9 18 6-6-6-6"></path>
+                  </svg>
                 </button>
               </a>
             </div>
           </article>
-          {/* Image Section - Enhanced responsive design with glowing effect */}
+          {/* Image Section */}
           <figure className="w-full md:w-1/2 px-4 sm:px-0">
             <div className="relative w-full max-w-[20rem] sm:max-w-[24rem] md:max-w-[28rem] lg:max-w-[32rem] mx-auto">
               {/* Enhanced glowing effect with layered gradients */}
@@ -38,16 +58,26 @@ export default function HeroSection() {
                 <div className="absolute inset-2 bg-purple-400 rounded-full opacity-25 blur-xl" />
               </div>
 
-              {/* Image container */}
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg shadow-xl ring-1 ring-purple-200/50">
+              {/* Image container with hover effect */}
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg shadow-xl ring-1 ring-purple-200/50 group">
+                {/* Default image */}
                 <img
-                  src={vectorImage}
-                  alt="Illustration from a children's storybook featuring colorful characters"
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  src={DefaultImage}
+                  alt="Mother reading a book to children"
+                  className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:opacity-0"
                   loading="lazy"
                   decoding="async"
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                  srcSet={`${vectorImage} 320w, ${vectorImage} 640w, ${vectorImage} 1024w`}
+                />
+
+                {/* Hover image - positioned absolutely over the first image */}
+                <img
+                  src={HoverImage}
+                  alt="Parent and child reading fairy tales together"
+                  className="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out opacity-0 group-hover:opacity-100 transform scale-105 group-hover:scale-100"
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                 />
               </div>
             </div>
