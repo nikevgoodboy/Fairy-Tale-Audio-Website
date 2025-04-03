@@ -11,7 +11,7 @@ export default function Hero() {
           </h1>
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row justify-center p-2 py-1 mt-4 mb-4 gap-4">
+      <div className="flex flex-col-12 sm:flex-row justify-center p-2 py-1 mt-4 mb-4 gap-4">
         <div className="w-full sm:w-64">
           <div className="relative">
             <select className="w-full bg-pink-200 rounded-lg border-b-2 border-pink-500 text-gray-800 px-4 py-2 focus:outline-none focus:border-blue-500 transition-colors duration-200 appearance-none">
