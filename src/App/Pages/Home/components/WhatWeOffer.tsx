@@ -59,7 +59,7 @@ export default function WhatWeOffer() {
                   </div>
 
                   {/* Image */}
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-xl shadow-2xl ring-1 ring-pink-200/30">
+                  <div className="relative overflow-hidden rounded-xl shadow-2xl">
                     <img
                       src={feature.image}
                       alt={feature.alt}
