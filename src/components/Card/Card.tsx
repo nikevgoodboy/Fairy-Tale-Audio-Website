@@ -37,7 +37,7 @@ function CardComponent({ title, description, image, alt }: CardProps) {
         <img
           src={image}
           alt={alt}
-          className="w-full h-[300px] object-fit rounded-t-lg"
+          className="w-full h-[280px] object-fit rounded-t-lg"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50"></div>
         <div className="absolute bottom-2 left-2 text-white font-semibold text-sm">

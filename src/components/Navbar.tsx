@@ -17,7 +17,7 @@ interface NavItem {
 
 const NavItems: NavItem[] = [
   { name: "HOME", link: "/" },
-  { name: "STORIES", link: "/storydetail" },
+  { name: "STORIES", link: "/story" },
   { name: "FAVORITE", link: "favorite" },
 ];
 
