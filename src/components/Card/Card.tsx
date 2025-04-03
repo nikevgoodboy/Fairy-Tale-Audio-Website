@@ -49,10 +49,10 @@ function CardComponent({ title, description, image, alt }: CardProps) {
           <h2 className="text-lg font-semibold text-gray-800 text-pink-500">
             {title}
           </h2>
-          <div className="text-gray-500 hover:text-pink-700 transition-colors duration-200">
+          <div className="text-gray-500 border-2 rounded-xl  border-pink-500 hover:text-pink-700 transition-colors duration-200">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-5 w-5 border-2 rounded-xl  border-pink-500"
               viewBox="0 0 20 20"
               fill="currentColor"
             >

@@ -75,7 +75,7 @@ export default function WhatWeOffer() {
                     {feature.title.split(" ")[1]}
                   </span>
                 </h2>
-                <p className="text-sm xs:text-base sm:text-lg md:text-lg lg:text-xl text-gray-600 leading-relaxed">
+                <p className="text-sm xs:text-base sm:text-lg md:text-lg lg:text-xl leading-relaxed">
                   {feature.description}
                 </p>
               </div>
