@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
 import Favorite from "./App/Pages/Favorite/Favorite";
 import Story from "./App/Pages/story-detail/story";
+import Login from "./App/Login-Register/Login";
+import ForgotPasseord from "./App/Login-Register/ForgetPassword";
 // i dont now
 
 function App() {
@@ -19,7 +21,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/favorite" element={<Favorite />} />
           <Route path="/story" element={<Story />} />
-          <Route path="/story" element={<Story />} />
+
+          
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPasseord />} />
+
         </Routes>
       </main>
       <Footer />

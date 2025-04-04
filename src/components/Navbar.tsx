@@ -1,12 +1,5 @@
-import {
-  useContext,
-  useState,
-  useRef,
-  useEffect,
-  MouseEvent,
-  KeyboardEvent,
-  ChangeEvent,
-} from "react";
+import { useContext, useState, useRef, useEffect, ChangeEvent } from "react";
+import { Link } from "react-router-dom";
 import LogoImage from "../assets/image.png";
 import { ThemeContext } from "../../src/App/Ui/ThemeContext";
 
@@ -86,47 +79,42 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
           <a href="/" className="flex-shrink-0">
-            <img src={LogoImage} alt="Logo" className="w-32 sm:w-40 lg:w-48" />
+            <img
+              src={LogoImage}
+              alt="Logo"
+              className="w-32 sm:w-40 lg:w-48 transition-all duration-300"
+            />
           </a>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden z-50">
-            <button
-              onClick={toggleMenu}
-              className="p-1 text-white focus:outline-none overflow-hidden"
-              aria-expanded={isOpen}
-              aria-label="Toggle menu"
-            >
-              <div className="relative w-6 h-6 flex items-center justify-center">
-                <i
-                  className={`fas fa-bars absolute transition-all duration-300 ease-in-out ${
-                    isOpen
-                      ? "opacity-0 rotate-90 scale-0"
-                      : "opacity-100 rotate-0 scale-100"
-                  }`}
-                ></i>
-                <i
-                  className={`fas fa-times absolute transition-all duration-300 ease-in-out ${
-                    isOpen
-                      ? "opacity-100 rotate-0 scale-100"
-                      : "opacity-0 -rotate-90 scale-0"
-                  }`}
-                ></i>
-              </div>
-            </button>
-          </div>
+          <button
+            onClick={toggleMenu}
+            className="lg:hidden p-2 text-white focus:outline-none rounded-md z-50"
+            aria-expanded={isOpen}
+            aria-label="Toggle navigation menu"
+          >
+            <div className="relative w-6 h-6">
+              <i
+                className={`fas fa-bars absolute transition-all duration-300 ease-in-out ${
+                  isOpen ? "opacity-0 scale-75" : "opacity-100 scale-100"
+                }`}
+              ></i>
+              <i
+                className={`fas fa-times absolute transition-all duration-300 ease-in-out ${
+                  isOpen ? "opacity-100 scale-100" : "opacity-0 scale-75"
+                }`}
+              ></i>
+            </div>
+          </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center justify-end flex-1">
-            <ul className="flex items-center space-x-4 xl:space-x-6">
+            <ul className="flex items-center gap-6 xl:gap-8">
               {NavItems.map((item, index) => (
-                <li
-                  key={`nav-item-${index}`}
-                  className="group relative flex items-center"
-                >
+                <li key={`nav-item-${index}`} className="relative">
                   <a
                     href={item.link}
-                    className="text-lg font-semibold text-white hover:text-[#FF0E4D] transition-colors duration-300 px-2"
+                    className="text-lg font-semibold text-white hover:text-[#FF0E4D] transition-colors duration-300 px-2 py-1"
                     aria-current={
                       item.link === window.location.pathname
                         ? "page"
@@ -136,21 +124,18 @@ export default function Navbar() {
                     {item.name}
                   </a>
                   {index < NavItems.length - 1 && (
-                    <span className="text-[#FF0E4D] text-3xl">{"|"}</span>
+                    <span className="text-[#FF0E4D] text-2xl mx-2">|</span>
                   )}
                 </li>
               ))}
               {/* Search */}
-              <li
-                className="relative w-full max-w-xs xl:max-w-md"
-                ref={searchRef}
-              >
+              <li className="relative w-full max-w-[16rem] xl:max-w-[20rem]">
                 <div className="relative">
                   <input
                     type="search"
-                    className="w-full bg-transparent border-2 border-[#FF0E4D] text-sm text-white pl-10 pr-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF0E4D] focus:border-[#FF0E4D]"
+                    className="w-full bg-black border-2 border-[#FF0E4D] text-white text-sm pl-10 pr-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF0E4D]/50 transition-all duration-300"
                     placeholder="Search..."
-                    aria-label="Search"
+                    aria-label="Search site"
                     value={searchQuery}
                     onChange={handleSearchChange}
                     onFocus={() =>
@@ -161,7 +146,7 @@ export default function Navbar() {
                     aria-autocomplete="list"
                     aria-controls="search-suggestions"
                   />
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 512 512"
@@ -170,22 +155,22 @@ export default function Navbar() {
                     >
                       <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
                     </svg>
-                  </div>
+                  </span>
                 </div>
                 {showSuggestions && filteredSuggestions.length > 0 && (
                   <ul
                     id="search-suggestions"
-                    className="absolute z-10 mt-1 w-full bg-gray-900 border border-gray-700 rounded-md shadow-lg max-h-60 overflow-auto"
+                    className="absolute z-20 mt-2 w-full bg-gray-900 border border-[#FF0E4D]/20 rounded-lg shadow-xl max-h-64 overflow-auto"
                     role="listbox"
                   >
                     {filteredSuggestions.map((suggestion, index) => (
                       <li
                         key={index}
-                        className="px-4 py-2 text-sm text-white hover:bg-gray-800 cursor-pointer"
+                        className="px-4 py-2 text-sm text-white hover:bg-gray-800 cursor-pointer transition-colors duration-200"
                         onClick={() => handleSelectSuggestion(suggestion)}
                         role="option"
                         tabIndex={0}
-                        onKeyDown={(e: KeyboardEvent<HTMLLIElement>) =>
+                        onKeyDown={(e) =>
                           e.key === "Enter" &&
                           handleSelectSuggestion(suggestion)
                         }
@@ -193,7 +178,7 @@ export default function Navbar() {
                         <div className="flex items-center">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4 mr-2 text-gray-400"
+                            className="h-4 w-4 mr-2 text-[#FF0E4D]"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -239,7 +224,7 @@ export default function Navbar() {
               </li>
               {/* User Icon */}
               <li>
-                <button className="text-white p-2 rounded-full hover:bg-gray-800 transition-colors duration-300">
+                <button className="text-white p-2 rounded-full hover:bg-gray-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF0E4D]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 448 512"
@@ -257,58 +242,60 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         <div
-          className={`lg:hidden fixed top-0 right-0 h-full w-64 bg-black z-40 transform transition-transform duration-300 ease-in-out ${
+          className={`lg:hidden fixed inset-y-0 right-0 w-72 bg-black z-40 transform transition-transform duration-300 ease-in-out ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="p-6 flex flex-col h-full">
-            <div className="space-y-6">
+          <div className="flex flex-col h-full p-6">
+            <div className="flex-1 space-y-6">
               {/* User Login */}
-              <button className="flex items-center space-x-2 text-white hover:text-[#FF0E4D] transition-colors duration-300">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512"
-                  className="w-5 h-5 fill-current"
-                  aria-hidden="true"
-                >
-                  <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
-                </svg>
-                <span>Login</span>
-              </button>
+              <Link to="/login" className="block">
+                <button className="flex items-center space-x-3 text-white hover:text-[#FF0E4D] transition-colors duration-300">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                    className="w-5 h-5 fill-current"
+                    aria-hidden="true"
+                  >
+                    <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
+                  </svg>
+                  <span className="text-lg">Login</span>
+                </button>
+              </Link>
 
               {/* Mobile Search */}
               <div className="relative" ref={searchRef}>
                 <input
                   type="search"
-                  className="w-full bg-transparent border-2 border-gray-800 text-sm text-white pl-10 pr-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full bg-black border-2 border-[#FF0E4D] text-white text-sm pl-10 pr-4 py-2.5 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF0E4D]/50 transition-all duration-300"
                   placeholder="Search..."
-                  aria-label="Search"
+                  aria-label="Search site"
                   value={searchQuery}
                   onChange={handleSearchChange}
                   onFocus={() => searchQuery.trim() && setShowSuggestions(true)}
                 />
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"
-                    className="w-5 h-5 text-gray-800 fill-current"
+                    className="w-5 h-5 text-[#FF0E4D] fill-current"
                     aria-hidden="true"
                   >
                     <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
                   </svg>
-                </div>
+                </span>
                 {showSuggestions && filteredSuggestions.length > 0 && (
-                  <ul className="absolute z-50 mt-1 w-full bg-gray-900 border border-gray-700 rounded-md shadow-lg max-h-60 overflow-auto">
+                  <ul className="absolute z-50 mt-2 w-full bg-gray-900 border border-[#FF0E4D]/20 rounded-lg shadow-xl max-h-64 overflow-auto">
                     {filteredSuggestions.map((suggestion, index) => (
                       <li
                         key={index}
-                        className="px-4 py-2 text-sm text-white hover:bg-gray-800 cursor-pointer"
+                        className="px-4 py-2 text-sm text-white hover:bg-gray-800 cursor-pointer transition-colors duration-200"
                         onClick={() => handleSelectSuggestion(suggestion)}
                       >
                         <div className="flex items-center">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4 mr-2 text-gray-400"
+                            className="h-4 w-4 mr-2 text-[#FF0E4D]"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -329,12 +316,12 @@ export default function Navbar() {
               </div>
 
               {/* Mobile Nav Items */}
-              <ul className="space-y-4">
+              <ul className="space-y-4 pt-2">
                 {NavItems.map((item) => (
-                  <li key={item.name} className="border-b border-gray-700 pb-2">
+                  <li key={item.name}>
                     <a
                       href={item.link}
-                      className="text-lg font-semibold text-white block hover:text-[#FF0E4D] transition-colors duration-300"
+                      className="text-lg font-semibold text-white hover:text-[#FF0E4D] transition-colors duration-300 block py-2"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.name}
@@ -344,10 +331,10 @@ export default function Navbar() {
               </ul>
             </div>
 
-            {/* Theme Toggle at Bottom */}
+            {/* Theme Toggle */}
             <div className="mt-auto pt-6">
               <div className="flex items-center justify-between">
-                <span className="text-white">Theme</span>
+                <span className="text-white text-sm">Theme</span>
                 <div
                   className="relative inline-block w-14 h-7 cursor-pointer overflow-hidden rounded-full"
                   onClick={toggleTheme}
@@ -378,7 +365,7 @@ export default function Navbar() {
         {/* Mobile Overlay */}
         {isOpen && (
           <div
-            className="fixed inset-0 bg-black/60 z-30 lg:hidden"
+            className="fixed inset-0 bg-black/70 z-30 lg:hidden"
             onClick={toggleMenu}
             aria-hidden="true"
           />
