@@ -11,43 +11,35 @@ export default function Hero() {
           </h1>
         </div>
       </div>
-      <div className="flex flex-col-12 sm:flex-row justify-center p-2 py-1 mt-4 mb-4 gap-4">
+
+      <div className="flex flex-col sm:flex-row justify-center p-3 gap-5">
+        {/* Story Type Dropdown */}
         <div className="w-full sm:w-64">
           <div className="relative">
-            <select className="w-full bg-pink-200 rounded-lg border-b-2 border-pink-500 text-gray-800 px-4 py-2 focus:outline-none focus:border-blue-500 transition-colors duration-200 appearance-none">
+            <select
+              className="w-full bg-pink-100 text-pink-700 rounded-full border-2 border-pink-400 
+                            px-5 py-2 shadow-lg font-[Pacifico] text-lg
+                            focus:outline-none focus:ring-4 focus:ring-pink-300 transition-all duration-200 appearance-none"
+            >
               <option value="" disabled selected>
-                <p> STORY TYPES</p>
+                🌸 Story Type 🌸
               </option>
-              <option value="1">
-                Classic
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="inline-block ml-1 h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </option>
-              <option value="2">Adventure</option>
-              <option value="3">Animal</option>
+              <option value="1">✨ Classic Fairytale</option>
+              <option value="2">🌈 Magical Adventure</option>
+              <option value="3">🐾 Cute Animal Tales</option>
             </select>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+            <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
               <svg
-                className="w-4 text-pink-500 h-4 text-gray-500"
+                className="w-6 h-6 text-pink-500 animate-bounce"
                 fill="none"
                 stroke="currentColor"
+                strokeWidth="2"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth="2"
                   d="M19 9l-7 7-7-7"
                 />
               </svg>
@@ -55,28 +47,33 @@ export default function Hero() {
           </div>
         </div>
 
+        {/* Age Dropdown */}
         <div className="w-full sm:w-64">
           <div className="relative">
-            <select className="w-full bg-pink-200 rounded-lg border-b-2 border-pink-500 text-gray-800 px-4 py-2 focus:outline-none focus:border-blue-500 transition-colors duration-200 appearance-none">
+            <select
+              className="w-full bg-pink-100 text-pink-700 rounded-full border-2 border-pink-400 
+                            px-5 py-2 shadow-lg font-[Pacifico] text-lg
+                            focus:outline-none focus:ring-4 focus:ring-pink-300 transition-all duration-200 appearance-none"
+            >
               <option value="" disabled selected>
-                AGE
+                🎂 Choose Age 🎂
               </option>
-              <option value="2">0 - 5</option>
-              <option value="3">6 - 10</option>
-              <option value="3">11 - 15</option>
+              <option value="1">👶 0 - 5 years</option>
+              <option value="2">🧒 6 - 10 years</option>
+              <option value="3">👦 11 - 15 years</option>
             </select>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+            <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
               <svg
-                className="w-4 h-4 text-pink-500"
+                className="w-6 h-6 text-pink-500 animate-bounce"
                 fill="none"
                 stroke="currentColor"
+                strokeWidth="2"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth="2"
                   d="M19 9l-7 7-7-7"
                 />
               </svg>

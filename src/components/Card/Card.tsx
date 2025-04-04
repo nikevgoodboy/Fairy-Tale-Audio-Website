@@ -3,71 +3,53 @@ import image1 from "../../assets/images1.webp";
 import image2 from "../../assets/images2.webp";
 import image3 from "../../assets/images3.webp";
 import image4 from "../../assets/images4.webp";
-import imgae5 from "../../assets/images5.webp";
-import imgae6 from "../../assets/images6.webp";
-import imgae7 from "../../assets/images7.webp";
-import imgae8 from "../../assets/imgae8.webp";
-import imgae9 from "../../assets/imgea9.webp";
-import { Link } from "react-router-dom"; // Import Link
+import image5 from "../../assets/images5.webp";
+import image6 from "../../assets/images6.webp";
+import image7 from "../../assets/images7.webp";
+import image8 from "../../assets/images8.webp";
+import image9 from "../../assets/images9.webp";
+import { Link } from "react-router-dom";
 
-const imagesArray = [
-  image1,
-  image2,
-  image3,
-  image4,
-  imgae5,
-  imgae6,
-  imgae7,
-  imgae8,
-  imgae9,
-];
-
-// Define the props interface for the Card component
 interface CardProps {
   title: string;
   description: string;
   image: string;
   alt: string;
-  link?: string; // Add link prop
+  link?: string;
 }
 
-// Card component with props
 function CardComponent({ title, description, image, alt, link }: CardProps) {
   return (
     <Link
       to={link || "#"}
-      className="max-w-[300px] bg-white border border-pink-500 hover:border-blue-500 rounded-lg shadow-sm dark:bg-gray-800 transition-transform transform hover:scale-101 gap-4 block"
+      className="max-w-[260px] bg-white rounded-lg shadow-lg transition-transform transform hover:scale-101 gap-4 block"
     >
       <div className="relative">
         <img
           src={image}
           alt={alt}
-          className="w-full h-[280px] object-fit rounded-t-lg"
+          className="w-full hover:border-blue-500 h-[210px] object-fit rounded-t-lg"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50"></div>
-        <div className="absolute bottom-2 left-2 text-white font-semibold text-sm">
-          Black Desert
-        </div>
+        <div className="absolute inset-1 from-transparent to-black opacity-50"></div>
       </div>
       <div className="p-4">
         <div className="flex items-center justify-between mb-2">
-          <h2 className="text-lg font-semibold text-gray-800 text-pink-500">
-            {title}
-          </h2>
-          <div className="text-gray-500 border-2 rounded-xl  border-pink-500 hover:text-pink-700 transition-colors duration-200">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 border-2 rounded-xl  border-pink-500"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
+          <h2 className="text-lg font-semibold text-pink-500">{title}</h2>
+          <button className="flex items-center rounded-full overflow-hidden bg-white/20 backdrop-blur-md shadow-lg border border-white/30 hover:scale-105 transition-transform">
+            <div className="px-1 py-1 bg-gradient-to-r from-purple-400 to-blue-500 flex items-center justify-center">
+              <svg
+                className="w-5 ml-1 h-5 text-white drop-shadow-md"
+                fill="red"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+              </svg>
+            </div>
+            <div className="px-3 py-1 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold text-sm">
+              200
+            </div>
+          </button>
         </div>
         <p className="text-sm text-gray-600">{description}</p>
       </div>
@@ -83,7 +65,7 @@ export default function Card() {
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: image1,
       alt: "Card 1 Image",
-      link: "/story/1",
+      link: "/",
     },
     {
       title: "Card 2 Title",
@@ -113,7 +95,7 @@ export default function Card() {
       title: "Card 5 Title",
       description:
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
-      image: imgae5,
+      image: image5,
       alt: "Card 5 Image",
       link: "/story/5",
     },
@@ -121,7 +103,7 @@ export default function Card() {
       title: "Card 6 Title",
       description:
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
-      image: imgae6,
+      image: image6,
       alt: "Card 6 Image",
       link: "/story/6",
     },
@@ -129,7 +111,7 @@ export default function Card() {
       title: "Card 7 Title",
       description:
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
-      image: imgae7,
+      image: image7,
       alt: "Card 7 Image",
       link: "/story/7",
     },
@@ -137,7 +119,7 @@ export default function Card() {
       title: "Card 8 Title",
       description:
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
-      image: imgae8,
+      image: image8,
       alt: "Card 8 Image",
       link: "/story/8",
     },
@@ -145,7 +127,7 @@ export default function Card() {
       title: "Card 9 Title",
       description:
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
-      image: imgae9,
+      image: image9,
       alt: "Card 9 Image",
       link: "/story/9",
     },
@@ -176,7 +158,7 @@ export default function Card() {
   ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-4 pb-6">
+    <div className="flex flex-wrap justify-center gap-7 pt-6 pb-6">
       {cardData.map((card, index) => (
         <CardComponent
           key={index}
