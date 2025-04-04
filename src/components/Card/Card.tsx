@@ -8,6 +8,7 @@ import imgae6 from "../../assets/images6.webp";
 import imgae7 from "../../assets/images7.webp";
 import imgae8 from "../../assets/imgae8.webp";
 import imgae9 from "../../assets/imgea9.webp";
+import { Link } from "react-router-dom"; // Import Link
 
 const imagesArray = [
   image1,
@@ -27,12 +28,16 @@ interface CardProps {
   description: string;
   image: string;
   alt: string;
+  link?: string; // Add link prop
 }
 
 // Card component with props
-function CardComponent({ title, description, image, alt }: CardProps) {
+function CardComponent({ title, description, image, alt, link }: CardProps) {
   return (
-    <div className="max-w-[300px] bg-white border border-pink-500 hover:border-blue-500 rounded-lg shadow-sm dark:bg-gray-800 transition-transform transform hover:scale-101 gap-4">
+    <Link
+      to={link || "#"}
+      className="max-w-[300px] bg-white border border-pink-500 hover:border-blue-500 rounded-lg shadow-sm dark:bg-gray-800 transition-transform transform hover:scale-101 gap-4 block"
+    >
       <div className="relative">
         <img
           src={image}
@@ -66,7 +71,7 @@ function CardComponent({ title, description, image, alt }: CardProps) {
         </div>
         <p className="text-sm text-gray-600">{description}</p>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -78,6 +83,7 @@ export default function Card() {
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: image1,
       alt: "Card 1 Image",
+      link: "/story/1",
     },
     {
       title: "Card 2 Title",
@@ -85,6 +91,7 @@ export default function Card() {
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: image2,
       alt: "Card 2 Image",
+      link: "/story/2",
     },
     {
       title: "Card 3 Title",
@@ -92,6 +99,7 @@ export default function Card() {
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: image3,
       alt: "Card 3 Image",
+      link: "/story/3",
     },
     {
       title: "Card 4 Title",
@@ -99,62 +107,71 @@ export default function Card() {
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: image4,
       alt: "Card 4 Image",
+      link: "/story/4",
     },
     {
-      title: "Card 4 Title",
+      title: "Card 5 Title",
       description:
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: imgae5,
-      alt: "Card 4 Image",
+      alt: "Card 5 Image",
+      link: "/story/5",
     },
     {
-      title: "Card 4 Title",
+      title: "Card 6 Title",
       description:
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: imgae6,
-      alt: "Card 4 Image",
+      alt: "Card 6 Image",
+      link: "/story/6",
     },
     {
-      title: "Card 4 Title",
+      title: "Card 7 Title",
       description:
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: imgae7,
-      alt: "Card 4 Image",
+      alt: "Card 7 Image",
+      link: "/story/7",
     },
     {
-      title: "Card 4 Title",
+      title: "Card 8 Title",
       description:
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
-      image: imgae5,
-      alt: "Card 4 Image",
+      image: imgae8,
+      alt: "Card 8 Image",
+      link: "/story/8",
     },
     {
-      title: "Card 4 Title",
-      description:
-        "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
-      image: imgae7,
-      alt: "Card 4 Image",
-    },
-    {
-      title: "Card 4 Title",
+      title: "Card 9 Title",
       description:
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: imgae9,
-      alt: "Card 4 Image",
+      alt: "Card 9 Image",
+      link: "/story/9",
     },
     {
-      title: "Card 2 Title",
+      title: "Card 10 Title",
       description:
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: image2,
-      alt: "Card 2 Image",
+      alt: "Card 10 Image",
+      link: "/story/10",
     },
     {
-      title: "Card 3 Title",
+      title: "Card 11 Title",
       description:
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: image3,
-      alt: "Card 3 Image",
+      alt: "Card 11 Image",
+      link: "/story/11",
+    },
+    {
+      title: "Card 12 Title",
+      description:
+        "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
+      image: image1,
+      alt: "Card 12 Image",
+      link: "/story/12",
     },
   ];
 
@@ -167,6 +184,7 @@ export default function Card() {
           description={card.description}
           image={card.image}
           alt={card.alt}
+          link={card.link}
         />
       ))}
     </div>
