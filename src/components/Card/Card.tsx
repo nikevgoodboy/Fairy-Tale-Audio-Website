@@ -62,7 +62,7 @@ export default function Card() {
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: image1,
       alt: "Card 1 Image",
-      link: "/",
+      link: "/StoryDetail",
     },
     {
       title: "Card 2 Title",
@@ -70,7 +70,7 @@ export default function Card() {
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: image2,
       alt: "Card 2 Image",
-      link: "/story/2",
+      link: "/StoryDetail",
     },
     {
       title: "Card 3 Title",
@@ -78,7 +78,7 @@ export default function Card() {
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: image3,
       alt: "Card 3 Image",
-      link: "/story/3",
+      link: "/StoryDetail3",
     },
     {
       title: "Card 4 Title",
@@ -86,7 +86,7 @@ export default function Card() {
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: image4,
       alt: "Card 4 Image",
-      link: "/story/4",
+      link: "/StoryDetail",
     },
     {
       title: "Card 5 Title",
@@ -94,7 +94,7 @@ export default function Card() {
         "Parents, join your little ones in exploring this beautiful world of  folklore and adventure. With interactive elements and shared reading  modes, create lasting memories as you guide their journey through  enchanting tales.",
       image: image5,
       alt: "Card 5 Image",
-      link: "/story/5",
+      link: "/StoryDetail",
     },
     {
       title: "Card 6 Title",
