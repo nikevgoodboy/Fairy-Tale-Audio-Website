@@ -35,19 +35,16 @@ function CardComponent({ title, description, image, alt, link }: CardProps) {
       <div className="p-4">
         <div className="flex items-center justify-between mb-2">
           <h2 className="text-lg font-semibold text-pink-500">{title}</h2>
-          <button className="flex items-center rounded-full overflow-hidden bg-white/20 backdrop-blur-md shadow-lg border border-white/30 hover:scale-105 transition-transform">
-            <div className="px-1 py-1 bg-gradient-to-r from-purple-400 to-blue-500 flex items-center justify-center">
+          <button className="flex items-center justify-center p-1 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full shadow-sm hover:scale-100 transform transition-all hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-700">
+            <div className="px-2 py-2  from-pink-500 rounded-full flex items-center justify-center hover:from-pink-500 hover:to-pink-500 transition-all">
               <svg
-                className="w-5 ml-1 h-5 text-white drop-shadow-md"
-                fill="red"
+                className="w-4 h-4 text-white drop-shadow-sm hover:text-red-600 "
+                fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
               </svg>
-            </div>
-            <div className="px-3 py-1 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold text-sm">
-              200
             </div>
           </button>
         </div>

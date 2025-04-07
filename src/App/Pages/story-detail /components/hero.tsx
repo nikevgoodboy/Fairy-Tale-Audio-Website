@@ -2,7 +2,7 @@ export default function Hero() {
   return (
     <section>
       <div className=" from-teal-100 to-lime-100 p-8 rounded-lg ">
-        <div className="text-center">
+        <div className="text-center shadow-lg">
           <h1 className="text-5xl font-extrabold text-withe mb-2">
             FAIRY TALES
           </h1>
@@ -12,7 +12,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-center p-3 gap-5">
+      <div className="flex flex-col-12 sm:flex-row justify-center p-3 gap-5">
         {/* Story Type Dropdown */}
         <div className="w-full sm:w-64">
           <div className="relative">
