@@ -4,6 +4,22 @@ import LoginBackground from "../../assets/LoginBackground.png";
 import LoginButton from "../../components/Buttons/LoginButton";
 import { Link } from "react-router-dom";
 
+// Mock user database
+const MOCK_USERS = [
+  {
+    id: "user-1",
+    email: "user@example.com",
+    password: "password123",
+    name: "Demo User",
+  },
+  {
+    id: "user-2",
+    email: "ksdf71464@gmail.com",
+    password: "Admin1245",
+    name: "Admin User",
+  },
+];
+
 // Types for our form and API responses
 interface LoginFormData {
   email: string;
@@ -49,23 +65,28 @@ export default function Login() {
   const verifyToken = React.useCallback(
     async (token: string) => {
       try {
-        const response = await fetch("/api/auth/verify", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        // Mock token verification delay
+        setIsLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 800));
 
-        if (response.ok) {
-          // Token is valid, redirect to dashboard
-          navigate("/dashboard");
+        // Parse the token to get user info
+        const tokenData = JSON.parse(atob(token.split(".")[1]));
+        const now = Date.now() / 1000;
+
+        if (tokenData && tokenData.exp > now) {
+          // Token is valid, redirect to Home
+          navigate("/");
         } else {
-          // Token is invalid, clear it
+          // Token is expired, clear it
           localStorage.removeItem("authToken");
           sessionStorage.removeItem("authToken");
         }
       } catch (err) {
         console.error("Token verification error:", err);
+        localStorage.removeItem("authToken");
+        sessionStorage.removeItem("authToken");
+      } finally {
+        setIsLoading(false);
       }
     },
     [navigate]
@@ -75,7 +96,7 @@ export default function Login() {
     const token =
       localStorage.getItem("authToken") || sessionStorage.getItem("authToken");
     if (token) {
-      // Verify token validity with backend before redirecting
+      // Verify token validity before redirecting
       verifyToken(token);
     }
   }, [verifyToken]);
@@ -119,6 +140,56 @@ export default function Login() {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Mock API call to simulate backend authentication
+  const mockLoginApi = async (
+    email: string,
+    password: string
+  ): Promise<LoginResponse> => {
+    // Simulate API delay
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    // Find user in our mock database
+    const user = MOCK_USERS.find(
+      (u) => u.email === email && u.password === password
+    );
+
+    if (user) {
+      // Create a mock JWT token with expiration
+      const now = Date.now();
+      const expiresIn = 60 * 60 * 24; // 24 hours in seconds
+
+      const header = btoa(JSON.stringify({ alg: "HS256", typ: "JWT" }));
+      const payload = btoa(
+        JSON.stringify({
+          sub: user.id,
+          name: user.name,
+          email: user.email,
+          iat: Math.floor(now / 1000),
+          exp: Math.floor(now / 1000) + expiresIn,
+        })
+      );
+      const signature = btoa("mock-signature"); // In real world, this would be cryptographically signed
+
+      const token = `${header}.${payload}.${signature}`;
+
+      return {
+        success: true,
+        token,
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+        },
+      };
+    } else {
+      // Failed login attempt
+      return {
+        success: false,
+        error: "Invalid email or password",
+      };
+    }
+  };
+
   // Form submission handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -130,18 +201,8 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
-
-      const data: LoginResponse = await response.json();
+      // Call our mock API instead of a real backend
+      const data = await mockLoginApi(formData.email, formData.password);
 
       if (data.success && data.token) {
         handleLoginSuccess(data.token);
@@ -160,9 +221,9 @@ export default function Login() {
     }
   };
 
-  // Login button click handler for the new LoginButton component
+  // Login button click handler
   const handleLoginClick = () => {
-    // This is now handled by the form submission
+    // This is now handled by form submission
     // The actual logic runs in handleSubmit which is triggered by the form's onSubmit
   };
 
@@ -171,15 +232,46 @@ export default function Login() {
     setSocialLoginLoading(provider);
 
     try {
-      // For OAuth implementations, you typically redirect to the provider's auth page
-      // This is a simplified example that simulates the process
-      if (provider === "google") {
-        window.location.href = "/api/auth/google";
-      } else if (provider === "facebook") {
-        window.location.href = "/api/auth/facebook";
-      }
+      // Simulate OAuth flow delay
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
+      // Create a mock user for social login
+      const socialUser = {
+        id: `social-${provider}-${Date.now()}`,
+        email: `${provider}.user@example.com`,
+        name: `${provider.charAt(0).toUpperCase() + provider.slice(1)} User`,
+      };
+
+      // Create mock token
+      const now = Date.now();
+      const expiresIn = 60 * 60 * 24; // 24 hours in seconds
+
+      const header = btoa(JSON.stringify({ alg: "HS256", typ: "JWT" }));
+      const payload = btoa(
+        JSON.stringify({
+          sub: socialUser.id,
+          name: socialUser.name,
+          email: socialUser.email,
+          provider,
+          iat: Math.floor(now / 1000),
+          exp: Math.floor(now / 1000) + expiresIn,
+        })
+      );
+      const signature = btoa("mock-signature");
+
+      const token = `${header}.${payload}.${signature}`;
+
+      // Store token in localStorage (social login typically remembers user)
+      localStorage.setItem("authToken", token);
+
+      // Redirect to Home
+      navigate("/");
     } catch (err) {
       console.error(`${provider} login error:`, err);
+      setErrors({
+        general: `${provider} login failed. Please try again later.`,
+      });
+    } finally {
       setSocialLoginLoading(null);
     }
   };
@@ -193,29 +285,32 @@ export default function Login() {
       sessionStorage.setItem("authToken", token);
     }
 
-    // Redirect to dashboard
-    navigate("/dashboard");
+    // Redirect to Home
+    navigate("/");
   };
 
   return (
     <section
-      className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      className="min-h-screen flex items-center justify-center bg-cover bg-center p-4"
       style={{ backgroundImage: `url(${LoginBackground})` }}
     >
-      <div className="w-full max-w-md p-8 rounded-lg border-2 border-white backdrop-blur-sm">
-        <h1 className="text-3xl font-bold text-center text-white mb-8">
+      <div className="w-full max-w-sm sm:max-w-md p-6 sm:p-8 rounded-lg border-2 border-white backdrop-blur-sm">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center text-white mb-6 sm:mb-8">
           Welcome back!
         </h1>
 
         {errors.general && (
-          <div className="mb-4 p-3 bg-red-500 bg-opacity-80 text-white rounded-md text-sm">
+          <div className="mb-3 p-2 bg-red-500 bg-opacity-80 text-white rounded-md text-xs sm:text-sm">
             {errors.general}
           </div>
         )}
 
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-sm text-white mb-1">
+          <div className="mb-3 sm:mb-4">
+            <label
+              htmlFor="email"
+              className="block text-xs sm:text-sm text-white mb-1"
+            >
               Email
             </label>
             <input
@@ -224,7 +319,7 @@ export default function Login() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-3 py-2 bg-white/60 bg-opacity-50 border rounded-md text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-[#FF0E4D] ${
+              className={`w-full px-2 sm:px-3 py-1.5 sm:py-2 bg-white/60 bg-opacity-50 border rounded-md text-white placeholder-white text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#FF0E4D] ${
                 errors.email ? "border-red-500" : "border-gray-300"
               }`}
               placeholder="Email..."
@@ -234,8 +329,11 @@ export default function Login() {
             )}
           </div>
 
-          <div className="mb-6">
-            <label htmlFor="password" className="block text-sm text-white mb-1">
+          <div className="mb-4 sm:mb-6">
+            <label
+              htmlFor="password"
+              className="block text-xs sm:text-sm text-white mb-1"
+            >
               Password
             </label>
             <input
@@ -244,7 +342,7 @@ export default function Login() {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className={`w-full px-3 py-2 bg-white/60 bg-opacity-50 border rounded-md text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-[#FF0E4D] ${
+              className={`w-full px-2 sm:px-3 py-1.5 sm:py-2 bg-white/60 bg-opacity-50 border rounded-md text-white placeholder-white text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#FF0E4D] ${
                 errors.password ? "border-red-500" : "border-gray-300"
               }`}
               placeholder="Password..."
@@ -254,11 +352,11 @@ export default function Login() {
             )}
           </div>
 
-          <div className="flex justify-center">
+          <div className="flex justify-center mb-3 sm:mb-4">
             <LoginButton isLoading={isLoading} onClick={handleLoginClick} />
           </div>
 
-          <div className="flex items-center justify-between mt-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0 text-xs sm:text-sm mt-2 sm:mt-4">
             <div className="flex items-center">
               <input
                 id="rememberMe"
@@ -266,38 +364,30 @@ export default function Login() {
                 type="checkbox"
                 checked={formData.rememberMe}
                 onChange={handleChange}
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                className="h-3 sm:h-4 w-3 sm:w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
-              <label
-                htmlFor="rememberMe"
-                className="ml-2 block text-sm text-white"
-              >
+              <label htmlFor="rememberMe" className="ml-2 text-white">
                 Remember me
               </label>
             </div>
-            <div className="text-sm">
-              <a
-                href="/register"
-                className="font-medium text-blue-300 hover:text-blue-400"
-              >
-                Don't have account?
-              </a>
-            </div>
+            <Link to="/register" className="text-blue-300 hover:text-blue-400">
+              Don't have account?
+            </Link>
           </div>
 
-          <div className="mt-6 text-center text-white text-sm">
+          <div className="mt-4 sm:mt-6 text-center text-white text-xs sm:text-sm">
             <p>— Or Login with —</p>
-            <div className="flex justify-center space-x-4 mt-4">
+            <div className="flex justify-center space-x-3 sm:space-x-4 mt-3 sm:mt-4">
               <button
                 type="button"
                 onClick={() => handleSocialLogin("google")}
                 disabled={socialLoginLoading !== null}
-                className="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50"
+                className="p-1.5 sm:p-2 bg-white rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
+                  width="20"
+                  height="20"
                   viewBox="0 0 24 24"
                   fill="red"
                 >
@@ -308,12 +398,12 @@ export default function Login() {
                 type="button"
                 onClick={() => handleSocialLogin("facebook")}
                 disabled={socialLoginLoading !== null}
-                className="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50"
+                className="p-1.5 sm:p-2 bg-white rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
+                  width="20"
+                  height="20"
                   viewBox="0 0 24 24"
                   fill="#1877F2"
                 >
@@ -323,10 +413,10 @@ export default function Login() {
             </div>
           </div>
 
-          <div className="mt-4 text-center">
+          <div className="mt-3 sm:mt-4 text-center">
             <Link
               to="/forgot-password"
-              className="text-sm text-blue-300 hover:text-blue-400"
+              className="text-xs sm:text-sm text-blue-300 hover:text-blue-400"
             >
               Forgot your password?
             </Link>
