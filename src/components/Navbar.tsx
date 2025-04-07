@@ -74,7 +74,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-black z-50">
+    <header className="fixed top-0 left-0 w-full bg-pink-600 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
@@ -114,7 +114,7 @@ export default function Navbar() {
                 <li key={`nav-item-${index}`} className="relative">
                   <a
                     href={item.link}
-                    className="text-lg font-semibold text-white hover:text-[#FF0E4D] transition-colors duration-300 px-2 py-1"
+                    className="text-lg font-semibold text-white hover:text-yellow-500 transition-colors duration-300 px-2 py-1"
                     aria-current={
                       item.link === window.location.pathname
                         ? "page"
@@ -124,7 +124,9 @@ export default function Navbar() {
                     {item.name}
                   </a>
                   {index < NavItems.length - 1 && (
-                    <span className="text-[#FF0E4D] text-2xl mx-2">|</span>
+                    <span className="text-yellow-500 text-2xl font-bold mx-2">
+                      {"|"}
+                    </span>
                   )}
                 </li>
               ))}
@@ -133,7 +135,7 @@ export default function Navbar() {
                 <div className="relative">
                   <input
                     type="search"
-                    className="w-full bg-black border-2 border-[#FF0E4D] text-white text-sm pl-10 pr-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF0E4D]/50 transition-all duration-300"
+                    className="w-full bg-pink-600 border-2 border-yellow-500 text-white text-sm pl-10 pr-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF0E4D]/50 transition-all duration-300"
                     placeholder="Search..."
                     aria-label="Search site"
                     value={searchQuery}
@@ -150,7 +152,7 @@ export default function Navbar() {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 512 512"
-                      className="w-5 h-5 text-[#FF0E4D] fill-current"
+                      className="w-5 h-5 text-yellow-500 fill-current"
                       aria-hidden="true"
                     >
                       <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
@@ -224,17 +226,19 @@ export default function Navbar() {
               </li>
               {/* User Icon */}
               <li>
-                <button className="text-white p-2 rounded-full hover:bg-gray-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF0E4D]">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 448 512"
-                    className="w-6 h-6 fill-current"
-                    aria-hidden="true"
-                  >
-                    <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
-                  </svg>
-                  <span className="sr-only">User account</span>
-                </button>
+                <Link to="/register">
+                  <button className="text-white p-2 rounded-full hover:bg-gray-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF0E4D]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 448 512"
+                      className="w-6 h-6 fill-current"
+                      aria-hidden="true"
+                    >
+                      <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
+                    </svg>
+                    <span className="sr-only">User account</span>
+                  </button>
+                </Link>
               </li>
             </ul>
           </nav>
