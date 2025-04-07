@@ -5,7 +5,7 @@ import Home from "./App/Pages/Home/Home";
 import Footer from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
 import Favorite from "./App/Pages/Favorite/Favorite";
-import Story from "./App/Pages/story-detail/story";
+import Story from "./App/Pages/story-detail /story";
 import Login from "./App/Login-Register/Login";
 import ForgotPasseord from "./App/Login-Register/ForgetPassword";
 import Register from "./App/Login-Register/Register";
