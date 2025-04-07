@@ -9,6 +9,7 @@ import Story from "./App/Pages/story-detail/story";
 import Login from "./App/Login-Register/Login";
 import ForgotPasseord from "./App/Login-Register/ForgetPassword";
 import Register from "./App/Login-Register/Register";
+import StoryDetail from "./App/Pages/StoryDetail/StoryDetail"
 // i dont now
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPasseord />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/storydetail" element={<StoryDetail />} />
         </Routes>
       </main>
       <Footer />
