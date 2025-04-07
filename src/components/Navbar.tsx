@@ -200,7 +200,7 @@ export default function Navbar() {
               {/* Theme Toggle */}
               <li className="px-4">
                 <div
-                  className="relative inline-block w-14 h-7 cursor-pointer overflow-hidden rounded-full"
+                  className="relative inline-block w-14 h-7 mt-2 cursor-pointer overflow-hidden rounded-full"
                   onClick={toggleTheme}
                   aria-label={`Switch to ${
                     theme === "dark" ? "light" : "dark"
