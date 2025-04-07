@@ -14,8 +14,8 @@ const MOCK_USERS = [
   },
   {
     id: "user-2",
-    email: "ksdf71464@gmail.com",
-    password: "Admin1245",
+    email: "example@gmail.com",
+    password: "Admi88n1245",
     name: "Admin User",
   },
 ];
