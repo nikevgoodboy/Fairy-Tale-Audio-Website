@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import LoginBackground from "../../assets/LoginBackground.png";
+import LoginBackground from "../assets/LoginBackground.png";
 
 // Types for our form and API responses
 interface RegisterFormData {
@@ -303,7 +303,6 @@ export default function Register() {
     setSocialRegisterLoading(provider);
 
     try {
-      // Simulate OAuth flow delay
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
       // Create a mock user for social registration

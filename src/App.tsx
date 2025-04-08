@@ -1,15 +1,15 @@
 import "./App.css";
-import { ThemeProvider } from "./App/Ui/ThemeContext";
+import { ThemeProvider } from "./Layout/ThemeContext";
 import Navbar from "./components/Navbar";
-import Home from "./App/Pages/Home/Home";
+import Home from "./Pages/Home/Home";
 import Footer from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
-import Favorite from "./App/Pages/Favorite/Favorite";
-import Story from "./App/Pages/story-detail /story";
-import Login from "./App/Login-Register/Login";
-import ForgotPasseord from "./App/Login-Register/ForgetPassword";
-import Register from "./App/Login-Register/Register";
-import StoryDetail from "./App/Pages/StoryDetail/StoryDetail"
+import Favorite from "./Pages/Favorite/Favorite";
+import Story from "./Pages/story-detail /story";
+import Login from "./Auth/Login";
+import ForgotPasseord from "./Auth/ForgetPassword";
+import Register from "./Auth/Register";
+import StoryDetail from "./Pages/StoryDetail/StoryDetail";
 // i dont now
 
 function App() {

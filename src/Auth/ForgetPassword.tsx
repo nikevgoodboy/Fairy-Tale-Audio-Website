@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import LoginBackground from "../../assets/LoginBackground.png";
+import LoginBackground from "../assets/LoginBackground.png";
 
 // Removed unused ForgotPasswordFormData interface
 
