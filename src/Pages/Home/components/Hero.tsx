@@ -1,4 +1,4 @@
-import ExploreStoriesButton from "../../../../components/Buttons/ExploreStoriesButton";
+import ExploreStoriesButton from "../../../components/Buttons/ExploreStoriesButton";
 export default function HeroSection() {
   const DefaultImage =
     "https://media.istockphoto.com/id/946853684/photo/mom-and-children-reading-book.jpg?s=612x612&w=0&k=20&c=-X-msnp69ziQbgm2Fqs9PVZldjGGpkmx5t2Vnabe5Hk=";

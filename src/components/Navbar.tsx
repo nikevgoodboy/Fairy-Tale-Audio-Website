@@ -1,7 +1,7 @@
 import { useContext, useState, useRef, useEffect, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import LogoImage from "../assets/image.png";
-import { ThemeContext } from "../../src/App/Ui/ThemeContext";
+import { ThemeContext } from "../Layout/ThemeContext";
 
 interface NavItem {
   name: string;
