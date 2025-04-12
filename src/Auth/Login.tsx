@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import LoginBackground from "../assets/LoginBackground.png";
 
@@ -15,10 +15,11 @@ interface ValidationErrors {
   general?: string;
 }
 
-// API response type
-interface LoginApiResponse {
-  success: boolean;
-  error?: string;
+// User data structure
+interface UserData {
+  email: string;
+  isLoggedIn: boolean;
+  loginTime: number;
 }
 
 export default function Login() {
@@ -30,6 +31,17 @@ export default function Login() {
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  // Check if user is already logged in
+  useEffect(() => {
+    const userData = localStorage.getItem("userData");
+    if (userData) {
+      const parsedUserData: UserData = JSON.parse(userData);
+      if (parsedUserData.isLoggedIn) {
+        navigate("/");
+      }
+    }
+  }, [navigate]);
 
   // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,19 +72,11 @@ export default function Login() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Mock API for login
-  const mockLoginApi = async (
-    email: string,
-    password: string
-  ): Promise<LoginApiResponse> => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Example implementation with proper type handling
-    if (email === "test@example.com" && password === "password123") {
-      return { success: true };
-    } else {
-      return { success: false, error: "Invalid credentials" };
-    }
+  // Simple authentication logic
+  const authenticateUser = (email: string, password: string): boolean => {
+    // This is a simplified example - in a real app, you might check against registered users
+    // or use an API
+    return email === "salmonineath31@gmail.com" && password === "Admin@1234";
   };
 
   // Handle form submission
@@ -86,13 +90,27 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      const response = await mockLoginApi(formData.email, formData.password);
+      // Simulate network delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      if (response.success) {
+      const isAuthenticated = authenticateUser(
+        formData.email,
+        formData.password
+      );
+
+      if (isAuthenticated) {
+        // Store user data in localStorage
+        const userData: UserData = {
+          email: formData.email,
+          isLoggedIn: true,
+          loginTime: Date.now(),
+        };
+
+        localStorage.setItem("userData", JSON.stringify(userData));
         navigate("/");
       } else {
         setErrors({
-          general: response.error || "Login failed. Please try again.",
+          general: "Invalid credentials. Please try again.",
         });
       }
     } catch (err) {

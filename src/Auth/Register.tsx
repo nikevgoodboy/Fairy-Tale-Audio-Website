@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import LoginBackground from "../assets/LoginBackground.png";
 
@@ -21,10 +21,12 @@ interface ValidationErrors {
   general?: string;
 }
 
-// API response type
-interface RegisterApiResponse {
-  success: boolean;
-  error?: string;
+// User data structure for storage
+interface RegisteredUser {
+  fullName: string;
+  email: string;
+  password: string;
+  registrationDate: number;
 }
 
 export default function Register() {
@@ -39,6 +41,17 @@ export default function Register() {
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  // Check if user is already logged in
+  useEffect(() => {
+    const userData = localStorage.getItem("userData");
+    if (userData) {
+      const parsedUserData = JSON.parse(userData);
+      if (parsedUserData.isLoggedIn) {
+        navigate("/");
+      }
+    }
+  }, [navigate]);
 
   // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,21 +92,18 @@ export default function Register() {
       newErrors.agreeToTerms = "You must agree to the terms and conditions";
     }
 
+    // Check if email already exists in localStorage
+    const registeredUsers = localStorage.getItem("registeredUsers");
+    if (registeredUsers) {
+      const users: RegisteredUser[] = JSON.parse(registeredUsers);
+      const existingUser = users.find((user) => user.email === formData.email);
+      if (existingUser) {
+        newErrors.email = "This email is already registered";
+      }
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
-
-  // Mock API for registration
-  const mockRegisterApi = async (
-    userData: RegisterFormData
-  ): Promise<RegisterApiResponse> => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Example implementation with proper type handling
-    if (userData.email.includes("existing")) {
-      return { success: false, error: "Email already exists" };
-    }
-    return { success: true };
   };
 
   // Handle form submission
@@ -107,15 +117,42 @@ export default function Register() {
     setIsLoading(true);
 
     try {
-      const response = await mockRegisterApi(formData);
+      // Simulate network delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      if (response.success) {
-        navigate("/");
-      } else {
-        setErrors({
-          general: response.error || "Registration failed. Please try again.",
-        });
-      }
+      // Create new user object
+      const newUser: RegisteredUser = {
+        fullName: formData.fullName,
+        email: formData.email,
+        password: formData.password,
+        registrationDate: Date.now(),
+      };
+
+      // Get existing users or create empty array
+      const existingUsers = localStorage.getItem("registeredUsers");
+      const users: RegisteredUser[] = existingUsers
+        ? JSON.parse(existingUsers)
+        : [];
+
+      // Add new user
+      users.push(newUser);
+
+      // Save back to localStorage
+      localStorage.setItem("registeredUsers", JSON.stringify(users));
+
+      // Also log the user in
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          email: formData.email,
+          fullName: formData.fullName,
+          isLoggedIn: true,
+          loginTime: Date.now(),
+        })
+      );
+
+      // Navigate to home page
+      navigate("/");
     } catch (err) {
       setErrors({ general: "Something went wrong. Please try again." });
     } finally {

@@ -1,7 +1,7 @@
 import { useContext, useState, useRef, useEffect, ChangeEvent } from "react";
-import { Link } from "react-router-dom";
 import LogoImage from "../assets/image.png";
 import { ThemeContext } from "../Layout/ThemeContext";
+import UserProfileNav from "../components/UserNavigation";
 
 interface NavItem {
   name: string;
@@ -57,7 +57,7 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: globalThis.MouseEvent): void => {
+    const handleClickOutside = (event: MouseEvent): void => {
       if (
         searchRef.current &&
         !searchRef.current.contains(event.target as Node)
@@ -65,12 +65,8 @@ export default function Navbar() {
         setShowSuggestions(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside as EventListener);
-    return () =>
-      document.removeEventListener(
-        "mousedown",
-        handleClickOutside as EventListener
-      );
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -132,7 +128,7 @@ export default function Navbar() {
               ))}
               {/* Search */}
               <li className="relative w-full max-w-[16rem] xl:max-w-[20rem]">
-                <div className="relative">
+                <div className="relative" ref={searchRef}>
                   <input
                     type="search"
                     className="w-full bg-pink-600 border-2 border-yellow-500 text-white text-sm pl-10 pr-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF0E4D]/50 transition-all duration-300"
@@ -170,12 +166,12 @@ export default function Navbar() {
                         key={index}
                         className="px-4 py-2 text-sm text-white hover:bg-gray-800 cursor-pointer transition-colors duration-200"
                         onClick={() => handleSelectSuggestion(suggestion)}
-                        role="option"
-                        tabIndex={0}
                         onKeyDown={(e) =>
                           e.key === "Enter" &&
                           handleSelectSuggestion(suggestion)
                         }
+                        role="option"
+                        tabIndex={0}
                       >
                         <div className="flex items-center">
                           <svg
@@ -224,21 +220,9 @@ export default function Navbar() {
                   </div>
                 </div>
               </li>
-              {/* User Icon */}
+              {/* User Profile */}
               <li>
-                <Link to="/register">
-                  <button className="text-white p-2 rounded-full hover:bg-gray-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF0E4D]">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 448 512"
-                      className="w-6 h-6 fill-current"
-                      aria-hidden="true"
-                    >
-                      <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
-                    </svg>
-                    <span className="sr-only">User account</span>
-                  </button>
-                </Link>
+                <UserProfileNav />
               </li>
             </ul>
           </nav>
@@ -252,21 +236,6 @@ export default function Navbar() {
         >
           <div className="flex flex-col h-full p-6">
             <div className="flex-1 space-y-6">
-              {/* User Login */}
-              <Link to="/login" className="block">
-                <button className="flex items-center space-x-3 text-white hover:text-[#FF0E4D] transition-colors duration-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 448 512"
-                    className="w-5 h-5 fill-current"
-                    aria-hidden="true"
-                  >
-                    <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
-                  </svg>
-                  <span className="text-lg">Login</span>
-                </button>
-              </Link>
-
               {/* Mobile Search */}
               <div className="relative" ref={searchRef}>
                 <input
@@ -277,6 +246,10 @@ export default function Navbar() {
                   value={searchQuery}
                   onChange={handleSearchChange}
                   onFocus={() => searchQuery.trim() && setShowSuggestions(true)}
+                  role="combobox"
+                  aria-expanded={showSuggestions}
+                  aria-autocomplete="list"
+                  aria-controls="search-suggestions-mobile"
                 />
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
@@ -289,12 +262,22 @@ export default function Navbar() {
                   </svg>
                 </span>
                 {showSuggestions && filteredSuggestions.length > 0 && (
-                  <ul className="absolute z-50 mt-2 w-full bg-gray-900 border border-[#FF0E4D]/20 rounded-lg shadow-xl max-h-64 overflow-auto">
+                  <ul
+                    id="search-suggestions-mobile"
+                    className="absolute z-50 mt-2 w-full bg-gray-900 border border-[#FF0E4D]/20 rounded-lg shadow-xl max-h-64 overflow-auto"
+                    role="listbox"
+                  >
                     {filteredSuggestions.map((suggestion, index) => (
                       <li
                         key={index}
                         className="px-4 py-2 text-sm text-white hover:bg-gray-800 cursor-pointer transition-colors duration-200"
                         onClick={() => handleSelectSuggestion(suggestion)}
+                        onKeyDown={(e) =>
+                          e.key === "Enter" &&
+                          handleSelectSuggestion(suggestion)
+                        }
+                        role="option"
+                        tabIndex={0}
                       >
                         <div className="flex items-center">
                           <svg
@@ -317,6 +300,11 @@ export default function Navbar() {
                     ))}
                   </ul>
                 )}
+              </div>
+
+              {/* User Profile for Mobile */}
+              <div className="pt-4 border-t border-gray-700">
+                <UserProfileNav isMobile={true} />
               </div>
 
               {/* Mobile Nav Items */}
