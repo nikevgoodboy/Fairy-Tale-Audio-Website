@@ -7,10 +7,8 @@ import { Routes, Route } from "react-router-dom";
 import Favorite from "./Pages/Favorite/Favorite";
 import Story from "./Pages/story-detail /story";
 import Login from "./Auth/Login";
-import ForgotPasseord from "./Auth/ForgetPassword";
 import Register from "./Auth/Register";
 import StoryDetail from "./Pages/StoryDetail/StoryDetail";
-// i dont now
 
 function App() {
   return (
@@ -24,7 +22,6 @@ function App() {
           <Route path="/favorite" element={<Favorite />} />
           <Route path="/story" element={<Story />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPasseord />} />
           <Route path="/register" element={<Register />} />
           <Route path="/storydetail" element={<StoryDetail />} />
         </Routes>
