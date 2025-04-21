@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router";
 import LoginBackground from "../assets/LoginBackground.png";
 
 // Form data structure
@@ -113,8 +113,13 @@ export default function Login() {
           general: "Invalid credentials. Please try again.",
         });
       }
-    } catch (err) {
-      setErrors({ general: "Something went wrong. Please try again." });
+    } catch (error: unknown) {
+      setErrors({
+        general:
+          error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again.",
+      });
     } finally {
       setIsLoading(false);
     }
