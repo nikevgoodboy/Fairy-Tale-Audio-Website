@@ -123,18 +123,7 @@ export default function UserProfileNav({ isMobile = false }) {
                   {userData.email}
                 </p>
               </div>
-              <a
-                href="/profile"
-                className="block px-4 py-2 text-sm text-white hover:bg-gray-800"
-              >
-                Profile
-              </a>
-              <a
-                href="/settings"
-                className="block px-4 py-2 text-sm text-white hover:bg-gray-800"
-              >
-                Settings
-              </a>
+              {/* call to action */}
               <button
                 onClick={handleLogout}
                 className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-800"
@@ -145,7 +134,7 @@ export default function UserProfileNav({ isMobile = false }) {
           )}
         </>
       ) : (
-        <Link to="/register">
+        <Link to="/login">
           <button className="text-white p-2 rounded-full hover:bg-gray-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF0E4D]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
