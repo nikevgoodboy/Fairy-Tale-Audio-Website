@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router";
-import LoginBackground from "../assets/LoginBackground.png";
+import LoginBackground from "../assets/door-stretching-into-fantasy-world.jpg";
 
 // Form data structure
 interface LoginFormData {
@@ -131,7 +131,7 @@ export default function Login() {
       style={{ backgroundImage: `url(${LoginBackground})` }}
     >
       <div className="w-full max-w-md p-6 rounded-lg border-2 border-white backdrop-blur-sm">
-        <h1 className="text-2xl font-bold text-center text-white mb-6">
+        <h1 className="text-2xl font-bold text-center text-dark mb-6">
           Welcome back!
         </h1>
 
