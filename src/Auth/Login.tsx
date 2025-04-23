@@ -4,13 +4,13 @@ import LoginBackground from "../assets/door-stretching-into-fantasy-world.jpg";
 
 // Form data structure
 interface LoginFormData {
-  email: string;
+  identifier: string; // Using identifier instead of email to match Strapi API
   password: string;
 }
 
 // Validation errors structure
 interface ValidationErrors {
-  email?: string;
+  identifier?: string;
   password?: string;
   general?: string;
 }
@@ -20,11 +20,27 @@ interface UserData {
   email: string;
   isLoggedIn: boolean;
   loginTime: number;
+  jwt: string;
+}
+
+// API response structure
+interface ApiResponse {
+  jwt: string;
+  user: {
+    id: number;
+    username: string;
+    email: string;
+    provider: string;
+    confirmed: boolean;
+    blocked: boolean;
+    createdAt: string;
+    updatedAt: string;
+  };
 }
 
 export default function Login() {
   const [formData, setFormData] = useState<LoginFormData>({
-    email: "",
+    identifier: "",
     password: "",
   });
 
@@ -37,7 +53,7 @@ export default function Login() {
     const userData = localStorage.getItem("userData");
     if (userData) {
       const parsedUserData: UserData = JSON.parse(userData);
-      if (parsedUserData.isLoggedIn) {
+      if (parsedUserData.isLoggedIn && parsedUserData.jwt) {
         navigate("/");
       }
     }
@@ -56,10 +72,10 @@ export default function Login() {
   const validateForm = (): boolean => {
     const newErrors: ValidationErrors = {};
 
-    if (!formData.email) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
+    if (!formData.identifier) {
+      newErrors.identifier = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.identifier)) {
+      newErrors.identifier = "Email is invalid";
     }
 
     if (!formData.password) {
@@ -70,13 +86,6 @@ export default function Login() {
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
-
-  // Simple authentication logic
-  const authenticateUser = (email: string, password: string): boolean => {
-    // This is a simplified example - in a real app, you might check against registered users
-    // or use an API
-    return email === "salmonineath31@gmail.com" && password === "Admin@1234";
   };
 
   // Handle form submission
@@ -90,35 +99,41 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      // Simulate network delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch("http://62.72.46.248:1337/api/auth/local", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          identifier: formData.identifier,
+          password: formData.password,
+        }),
+      });
 
-      const isAuthenticated = authenticateUser(
-        formData.email,
-        formData.password
-      );
+      const data = await response.json();
 
-      if (isAuthenticated) {
-        // Store user data in localStorage
-        const userData: UserData = {
-          email: formData.email,
-          isLoggedIn: true,
-          loginTime: Date.now(),
-        };
-
-        localStorage.setItem("userData", JSON.stringify(userData));
-        navigate("/");
-      } else {
-        setErrors({
-          general: "Invalid credentials. Please try again.",
-        });
+      if (!response.ok) {
+        throw new Error(data.error?.message || "Authentication failed");
       }
+
+      const apiResponse = data as ApiResponse;
+
+      // Store user data in localStorage
+      const userData: UserData = {
+        email: apiResponse.user.email,
+        isLoggedIn: true,
+        loginTime: Date.now(),
+        jwt: apiResponse.jwt,
+      };
+
+      localStorage.setItem("userData", JSON.stringify(userData));
+      navigate("/");
     } catch (error: unknown) {
       setErrors({
         general:
           error instanceof Error
             ? error.message
-            : "Something went wrong. Please try again.",
+            : "Authentication failed. Please check your credentials and try again.",
       });
     } finally {
       setIsLoading(false);
@@ -143,22 +158,25 @@ export default function Login() {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="email" className="block text-sm text-white mb-1">
+            <label
+              htmlFor="identifier"
+              className="block text-sm text-white mb-1"
+            >
               Email
             </label>
             <input
               type="email"
-              id="email"
-              name="email"
-              value={formData.email}
+              id="identifier"
+              name="identifier"
+              value={formData.identifier}
               onChange={handleChange}
               className={`w-full px-3 py-2 bg-white/60 border rounded-md text-black placeholder-gray-600 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF0E4D] ${
-                errors.email ? "border-red-500" : "border-gray-300"
+                errors.identifier ? "border-red-500" : "border-gray-300"
               }`}
               placeholder="Your email address"
             />
-            {errors.email && (
-              <p className="mt-1 text-red-400 text-xs">{errors.email}</p>
+            {errors.identifier && (
+              <p className="mt-1 text-red-400 text-xs">{errors.identifier}</p>
             )}
           </div>
 

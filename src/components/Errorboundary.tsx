@@ -2,15 +2,10 @@ import React, { ErrorInfo, ReactNode, Component } from "react";
 
 // Define prop types with better documentation
 interface ErrorBoundaryProps {
-  /** The components that this ErrorBoundary wraps */
   children: ReactNode;
-  /** Custom UI to display when an error occurs. If not provided, default UI will be used */
   fallback?: ReactNode | ((error: Error, reset: () => void) => ReactNode);
-  /** Optional callback that runs when an error is caught */
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
-  /** Whether to reset the error state when children props change */
   resetOnPropsChange?: boolean;
-  /** Optional component key to force full remounting on reset */
   resetKey?: string | number;
 }
 
@@ -20,10 +15,6 @@ interface ErrorBoundaryState {
   error: Error | null;
 }
 
-/**
- * ErrorBoundary component that catches JavaScript errors in its child component tree.
- * It displays a fallback UI instead of crashing the whole application.
- */
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   state: ErrorBoundaryState = {
     hasError: false,
