@@ -35,8 +35,8 @@ function CardComponent({ title, description, image, alt, link }: CardProps) {
       <div className="p-4">
         <div className="flex items-center justify-between mb-2">
           <h2 className="text-lg font-semibold text-pink-500">{title}</h2>
-          <button className="flex items-center justify-center p-1 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full shadow-sm hover:scale-100 transform transition-all hover:bg-gradient-to-r hover:from-pink-500 hover:to-pink-500">
-            <div className="px-2 py-2  from-pink-500 rounded-full flex items-center justify-center hover:from-pink-500 hover:to-pink-500 transition-all">
+          <button className="flex items-center justify-center p-1 bg-gradient-to-r from-white to-pink-600 rounded-full shadow-sm hover:scale-100 transform transition-all hover:bg-gradient-to-r hover:from-pink-500 hover:to-pink-500">
+            <div className="px-2 py-2  from-white rounded-full flex items-center justify-center hover:from-pink-500 hover:to-pink-500 transition-all">
               <svg
                 className="w-4 h-4 text-white drop-shadow-sm hover:text-red-600 "
                 fill="currentColor"
