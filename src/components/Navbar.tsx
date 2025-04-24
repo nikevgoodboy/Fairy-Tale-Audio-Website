@@ -1,7 +1,8 @@
 import { useContext, useState, useRef, useEffect, ChangeEvent } from "react";
 import LogoImage from "../assets/image.png";
-import { ThemeContext } from "../Layout/ThemeContext";
+import { ThemeContext } from "../Layout/ThemeContextProvider";
 import UserProfileNav from "../components/UserNavigation";
+import { Link } from "react-router";
 
 interface NavItem {
   name: string;
@@ -74,13 +75,13 @@ export default function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
-          <a href="/" className="flex-shrink-0">
+          <Link to="/" className="flex-shrink-0">
             <img
               src={LogoImage}
               alt="Logo"
               className="w-32 sm:w-40 lg:w-48 transition-all duration-300"
             />
-          </a>
+          </Link>
 
           {/* Mobile Menu Button */}
           <button

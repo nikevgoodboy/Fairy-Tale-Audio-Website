@@ -3,6 +3,7 @@ import Home from "./Pages/Home/Home";
 import Favorite from "./Pages/Favorite/Favorite";
 import StoryGrid from "./Pages/StoryGrid/StoryGrid";
 import Login from "./Auth/Login";
+import Register from "./Auth/Register";
 import StoryDetail from "./Pages/StoryDetail/StoryDetail";
 
 const AppRoute = () => {
@@ -13,6 +14,7 @@ const AppRoute = () => {
       <Route path="/favorite" element={<Favorite />} />
       <Route path="/story" element={<StoryGrid />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/storydetail" element={<StoryDetail />} />
     </Routes>
   );

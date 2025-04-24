@@ -1,3 +1,5 @@
+import Enjoyment from "../../../assets/Enjoyment.png";
+
 export default function WhatWeOffer() {
   const features = [
     {
@@ -5,7 +7,7 @@ export default function WhatWeOffer() {
       title: "Unlimited Enjoyment",
       description:
         "Dive into an enchanting world of fairy tales with no restrictions – enjoy unlimited reading and listening anytime, anywhere, sparking endless inspiration and entertainment.",
-      image: "/src/assets/Enjoyment.png",
+      image: Enjoyment,
       alt: "Whimsical illustration of children enjoying unlimited fairy tale adventures",
       reversed: false,
     },
