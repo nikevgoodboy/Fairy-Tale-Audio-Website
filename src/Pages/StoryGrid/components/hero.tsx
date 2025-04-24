@@ -101,7 +101,7 @@ export default function Hero() {
                 <option>Loading story types...</option>
               ) : (
                 storyTypes.map((type: StoryType) => {
-                  const attrs: StoryType["attributes"] = type.attributes;
+                  const attrs = type.attributes;
                   if (!attrs) return null; // Skip if attributes is undefined
                   return (
                     <option key={type.id} value={type.id}>

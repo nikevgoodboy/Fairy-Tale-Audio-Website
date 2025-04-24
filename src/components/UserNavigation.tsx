@@ -32,7 +32,6 @@ export default function UserProfileNav({ isMobile = false }) {
   // Handle logout
   const handleLogout = () => {
     if (userData) {
-      // Update user data in localStorage to logged out state
       localStorage.setItem(
         "userData",
         JSON.stringify({
@@ -49,6 +48,25 @@ export default function UserProfileNav({ isMobile = false }) {
 
       // Navigate to login page
       navigate("/login");
+    }
+  };
+
+  // Hangle My Favorite
+  const handleMyFavorite = () => {
+    if (userData) {
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          ...userData,
+          isLoggedIn: false,
+        })
+      );
+
+      // Close dropdown if open
+      setDropdownOpen(false);
+
+      // Navigate to login page
+      navigate("/favorite");
     }
   };
 
@@ -70,6 +88,13 @@ export default function UserProfileNav({ isMobile = false }) {
           <span className="text-lg truncate max-w-[150px]">
             {userData.fullName || userData.email.split("@")[0]}
           </span>
+          {/* call to action */}
+          <button
+            onClick={handleMyFavorite}
+            className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-800"
+          >
+            My Favorite
+          </button>
           <button
             onClick={handleLogout}
             className="ml-2 text-sm text-gray-300 hover:text-[#FF0E4D]"
@@ -79,7 +104,7 @@ export default function UserProfileNav({ isMobile = false }) {
         </div>
       </div>
     ) : (
-      <Link to="/login" className="block">
+      <Link to="/register" className="block">
         <button className="flex items-center space-x-3 text-white hover:text-[#FF0E4D] transition-colors duration-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -125,6 +150,12 @@ export default function UserProfileNav({ isMobile = false }) {
               </div>
               {/* call to action */}
               <button
+                onClick={handleMyFavorite}
+                className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-800"
+              >
+                My Favorite
+              </button>
+              <button
                 onClick={handleLogout}
                 className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-800"
               >
@@ -134,7 +165,7 @@ export default function UserProfileNav({ isMobile = false }) {
           )}
         </>
       ) : (
-        <Link to="/login">
+        <Link to="/register">
           <button className="text-white p-2 rounded-full hover:bg-gray-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF0E4D]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
