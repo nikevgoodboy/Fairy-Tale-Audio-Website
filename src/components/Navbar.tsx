@@ -13,6 +13,7 @@ const NavItems: NavItem[] = [
   { name: "HOME", link: "/" },
   { name: "STORIES", link: "/story" },
   { name: "FAVORITE", link: "/favorite" },
+  { name: "", link: "/storyDetail" },
 ];
 
 const mockSuggestions: string[] = [
