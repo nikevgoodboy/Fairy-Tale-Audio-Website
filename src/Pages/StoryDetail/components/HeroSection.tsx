@@ -4,9 +4,11 @@ export default function HeroSection() {
       <div className="container mx-auto">
         <div className="flex justify-center flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
           {/* Text Content */}
+
           <article className="w-full md:w-1/2 text-center md:text-left space-y-4">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight ">
               <span className="block">The Wolf and the Seven Little Kids</span>
+
               <span className="block text-[#FF0E4D]">
                 Short Stories & Audiobooks
               </span>
@@ -19,8 +21,10 @@ export default function HeroSection() {
             </p>
 
             {/* CTA Buttons */}
+
             <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-2">
               {/* Listen Button */}
+
               <a href="/">
                 <button className="flex items-center gap-2 px-5 py-3 bg-[#FF0E4D] text-white text-lg font-semibold rounded-[10px] hover:bg-[#eb3a61] transition duration-300">
                   <svg
@@ -35,6 +39,7 @@ export default function HeroSection() {
               </a>
 
               {/* Favorite Button */}
+
               <a href="#">
                 <button className="flex items-center gap-2 px-5 py-3 bg-[#fd7a9d] text-white text-lg font-semibold rounded-xl hover:bg-[#eb3a61] transition duration-300">
                   <svg
@@ -51,12 +56,15 @@ export default function HeroSection() {
           </article>
 
           {/* Image Section */}
+
           <figure className="w-[250px] sm:w-[390px] md:w-1/3">
             <div className="relative max-w-xs sm:max-w-sm md:max-w-md mx-auto group">
               {/* Glow Background */}
+
               <div className="absolute -inset-4 rounded-[1rem] bg-gradient-to-br from-[#ff7eb3] to-[#ff758c] opacity-20 blur-2xl backdrop-blur-sm pointer-events-none -z-10" />
 
               {/* Image Container */}
+
               <div className="overflow-hidden rounded-[1rem] shadow-lg ring-2 ring-pink-500/70 transform transition duration-300 ease-in-out group-hover:scale-105 group-hover:rotate-1">
                 <img
                   src="https://assets.sooperbooks.com/story-pics/21d4b624-c35c-41a8-a48a-9bd4a518b1b5the-wolf-the-seven-bedtime-story-animated-cover.375x500.webp"

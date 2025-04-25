@@ -3,13 +3,16 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import React, { useEffect, useState } from "react";
 
 interface CardProps {
+  id: number;
   title: string;
   description: string;
-  image: string;
-  alt: string;
+  image?: string;
+  alt?: string;
   link?: string;
   url: string;
 }
+
+// 🔧 Convert title to a URL-safe string
 
 const CardComponent: React.FC<CardProps> = ({
   title,
@@ -20,7 +23,7 @@ const CardComponent: React.FC<CardProps> = ({
 }) => {
   return (
     <Link
-      to={link || "#"}
+      to={link || "/StoryDetail"}
       className="max-w-[260px] bg-white rounded-lg shadow-lg transition-transform transform hover:scale-101 gap-4 block"
     >
       <div className="relative">
@@ -29,7 +32,6 @@ const CardComponent: React.FC<CardProps> = ({
           alt={alt}
           className="w-full hover:border-blue-500 h-[210px] object-fit rounded-t-lg"
         />
-        <div className="absolute inset-1 from-transparent to-black opacity-50"></div>
       </div>
       <div className="p-4">
         <div className="flex items-center justify-between mb-2">
@@ -44,9 +46,9 @@ const CardComponent: React.FC<CardProps> = ({
               >
                 <path
                   d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
-               2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09
-               C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5
-               c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09
+                  C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5
+                  c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
                 />
               </svg>
             </div>
@@ -77,11 +79,11 @@ export default function Card() {
           title={story.title}
           description={story.description}
           url={
-            story.cover_image.url ||
+            story.cover_image?.url ||
             "https://res.cloudinary.com/dsfuhhdez/image/upload/v1745376147/three_little_pigs_4740ba3915.webp"
           }
-          alt={story.image?.alt || "Story Image"}
-          link={`/stories/${story.id}`}
+          alt={story.cover_image?.alt || "Story Image"}
+          link={`/StoryDetail}`}
         />
       ))}
     </div>
