@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 interface CardProps {
   id: number;
@@ -11,8 +11,6 @@ interface CardProps {
   link?: string;
   url: string;
 }
-
-// 🔧 Convert title to a URL-safe string
 
 const CardComponent: React.FC<CardProps> = ({
   title,
@@ -60,16 +58,16 @@ const CardComponent: React.FC<CardProps> = ({
   );
 };
 
-export default function Card() {
-  const [stories, setStories] = useState<CardProps[]>([]);
+interface StoryProps {
+  stories: Array<{
+    id: number;
+    title: string;
+    description: string;
+    cover_image?: { url: string; alt: string };
+  }>;
+}
 
-  useEffect(() => {
-    fetch("http://62.72.46.248:1337/api/stories?populate=*")
-      .then((res) => res.json())
-      .then((data) => setStories(data.data))
-      .catch((error) => console.error("Error fetching stories:", error));
-  }, []);
-
+const Card: React.FC<StoryProps> = ({ stories }) => {
   return (
     <div className="flex flex-wrap justify-center gap-7 pt-6 pb-6">
       {stories.map((story) => (
@@ -83,9 +81,11 @@ export default function Card() {
             "https://res.cloudinary.com/dsfuhhdez/image/upload/v1745376147/three_little_pigs_4740ba3915.webp"
           }
           alt={story.cover_image?.alt || "Story Image"}
-          link={`/StoryDetail}`}
+          link={`/StoryDetail`} // Include story ID dynamically in the link
         />
       ))}
     </div>
   );
-}
+};
+
+export default Card;

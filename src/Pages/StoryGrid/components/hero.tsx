@@ -85,7 +85,102 @@ export default function Hero() {
   return (
     <section>
       <div className="p-4">
-        <div className="mt-4">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6 p-6">
+          {/* Search Input */}
+
+          {/* Story Type Dropdown */}
+          <div className="w-full sm:w-64 relative">
+            <select
+              className="w-full bg-pink-100 text-pink-700 rounded-full border-2 border-pink-400 
+                 px-5 py-2 shadow-lg font-[Pacifico] text-lg
+                 focus:outline-none focus:ring-4 focus:ring-pink-300 transition-all duration-200 appearance-none"
+              value={selectedStoryType}
+              onChange={handleStoryTypeChange}
+              disabled={loading}
+            >
+              <option value="" disabled>
+                🌸 Story Type
+              </option>
+              {loading ? (
+                <option>Loading...</option>
+              ) : (
+                storyTypes.map((type) => {
+                  const attrs = type.attributes;
+                  if (!attrs) return null;
+                  return (
+                    <option key={type.id} value={type.id}>
+                      {attrs.emoji || "✨"} {attrs.name}
+                    </option>
+                  );
+                })
+              )}
+            </select>
+            <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+              <svg
+                className={`w-6 h-6 text-pink-500 ${
+                  loading ? "animate-spin" : "animate-bounce"
+                }`}
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
+          </div>
+
+          {/* Age Dropdown */}
+          <div className="w-full sm:w-64 relative">
+            <select
+              className="w-full bg-pink-100 text-pink-700 rounded-full border-2 border-pink-400 
+                 px-5 py-2 shadow-lg font-[Pacifico] text-lg
+                 focus:outline-none focus:ring-4 focus:ring-pink-300 transition-all duration-200 appearance-none"
+              value={selectedAge}
+              onChange={handleAgeChange}
+            >
+              <option value="" disabled>
+                🎂 Choose Age
+              </option>
+              <option value="1">👶 0 - 5 years</option>
+              <option value="2">🧒 6 - 10 years</option>
+              <option value="3">👦 11 - 15 years</option>
+            </select>
+            <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+              <svg
+                className="w-6 h-6 text-pink-500 animate-bounce"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
+          </div>
+          <div className="w-full sm:w-auto flex justify-center px-4">
+            <input
+              type="text"
+              placeholder="🔍 Search stories..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="w-full sm:w-96 px-5 py-3 rounded-full border border-pink-300 bg-pink-50 
+                 text-pink-700 placeholder:text-pink-400 focus:outline-none focus:ring-2 
+                 focus:ring-pink-300 transition-all shadow-sm"
+            />
+          </div>
+        </div>
+
+        <div className="">
           {stories.length > 0 ? (
             <div className="flex flex-wrap justify-center gap-6 pt-8 pb-8">
               {stories.map((story: any) => {
@@ -149,100 +244,6 @@ export default function Hero() {
       )}
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6 p-6">
-        {/* Search Input */}
-        <div className="w-full sm:w-auto flex justify-center">
-          <input
-            type="text"
-            placeholder="🔍 Search stories..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="w-full sm:w-96 px-5 py-3 rounded-full border border-pink-300 bg-pink-50 
-                 text-pink-700 placeholder:text-pink-400 focus:outline-none focus:ring-2 
-                 focus:ring-pink-300 transition-all shadow-sm"
-          />
-        </div>
-
-        {/* Story Type Dropdown */}
-        <div className="w-full sm:w-64 relative">
-          <select
-            className="w-full bg-pink-100 text-pink-700 rounded-full border-2 border-pink-400 
-                 px-5 py-2 shadow-lg font-[Pacifico] text-lg focus:outline-none focus:ring-4 
-                 focus:ring-pink-300 transition-all appearance-none"
-            value={selectedStoryType}
-            onChange={handleStoryTypeChange}
-            disabled={loading}
-          >
-            <option value="" disabled>
-              🌸 Story Type
-            </option>
-            {loading ? (
-              <option>Loading...</option>
-            ) : (
-              storyTypes.map((type) => {
-                const attrs = type.attributes;
-                if (!attrs) return null;
-                return (
-                  <option key={type.id} value={type.id}>
-                    {attrs.emoji || "✨"} {attrs.name}
-                  </option>
-                );
-              })
-            )}
-          </select>
-          <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-            <svg
-              className={`w-6 h-6 text-pink-500 ${
-                loading ? "animate-spin" : "animate-bounce"
-              }`}
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </div>
-        </div>
-
-        {/* Age Dropdown */}
-        <div className="w-full sm:w-64 relative">
-          <select
-            className="w-full bg-pink-100 text-pink-700 rounded-full border-2 border-pink-400 
-                 px-5 py-2 shadow-lg font-[Pacifico] text-lg focus:outline-none focus:ring-4 
-                 focus:ring-pink-300 transition-all appearance-none"
-            value={selectedAge}
-            onChange={handleAgeChange}
-          >
-            <option value="" disabled>
-              🎂 Choose Age
-            </option>
-            <option value="1">👶 0 - 5 years</option>
-            <option value="2">🧒 6 - 10 years</option>
-            <option value="3">👦 11 - 15 years</option>
-          </select>
-          <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-            <svg
-              className="w-6 h-6 text-pink-500 animate-bounce"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
     </section>
   );
 }
