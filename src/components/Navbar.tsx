@@ -13,7 +13,6 @@ const NavItems: NavItem[] = [
   { name: "HOME", link: "/" },
   { name: "STORIES", link: "/story" },
   { name: "FAVORITE", link: "/favorite" },
-  { name: "", link: "/storyDetail" },
 ];
 
 const mockSuggestions: string[] = [
@@ -72,7 +71,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-pink-600 z-50">
+    <header className="fixed top-0 left-0 w-full bg-pink-600 z-50  shadow-lg">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
@@ -106,8 +105,8 @@ export default function Navbar() {
           </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center justify-end flex-1">
-            <ul className="flex items-center gap-6 xl:gap-8">
+          <nav className="hidden lg:flex  items-center justify-end flex-1">
+            <ul className="flex items-center me-7 gap-6 xl:gap-8">
               {NavItems.map((item, index) => (
                 <li key={`nav-item-${index}`} className="relative">
                   <a
@@ -130,33 +129,6 @@ export default function Navbar() {
               ))}
               {/* Search */}
               <li className="relative w-full max-w-[16rem] xl:max-w-[20rem]">
-                <div className="relative" ref={searchRef}>
-                  <input
-                    type="search"
-                    className="w-full bg-pink-600 border-2 border-yellow-500 text-white text-sm pl-10 pr-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF0E4D]/50 transition-all duration-300"
-                    placeholder="Search..."
-                    aria-label="Search site"
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                    onFocus={() =>
-                      searchQuery.trim() && setShowSuggestions(true)
-                    }
-                    role="combobox"
-                    aria-expanded={showSuggestions}
-                    aria-autocomplete="list"
-                    aria-controls="search-suggestions"
-                  />
-                  <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
-                      className="w-5 h-5 text-yellow-500 fill-current"
-                      aria-hidden="true"
-                    >
-                      <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-                    </svg>
-                  </span>
-                </div>
                 {showSuggestions && filteredSuggestions.length > 0 && (
                   <ul
                     id="search-suggestions"
