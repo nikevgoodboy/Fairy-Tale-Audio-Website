@@ -81,7 +81,7 @@ const Card: React.FC<StoryProps> = ({ stories }) => {
             "https://res.cloudinary.com/dsfuhhdez/image/upload/v1745376147/three_little_pigs_4740ba3915.webp"
           }
           alt={story.cover_image?.alt || "Story Image"}
-          link={`/StoryDetail/${story.id}`} // Include story ID dynamically in the link
+          link={`/StoryDetail`} // Include story ID dynamically in the link
         />
       ))}
     </div>
