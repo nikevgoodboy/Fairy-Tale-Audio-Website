@@ -1,6 +1,6 @@
 import { useContext, useState, useRef, useEffect, ChangeEvent } from "react";
 import LogoImage from "../assets/image.png";
-import { ThemeContext } from "../Layout/ThemeContextProvider";
+import { ThemeContext } from "../Layout/ThemeContext";
 import UserProfileNav from "../components/UserNavigation";
 import { Link } from "react-router";
 

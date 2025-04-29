@@ -25,6 +25,33 @@ interface StoryTypeResponse {
   };
 }
 
+interface Story {
+  id: number;
+  attributes: {
+    title: string;
+    description?: string;
+    cover_image?: {
+      data: {
+        attributes: {
+          url: string;
+        };
+      };
+    };
+  };
+}
+
+interface StoriesResponse {
+  data: Story[];
+  meta: {
+    pagination: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
+}
+
 export default function Hero() {
   const [storyTypes, setStoryTypes] = useState<StoryType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -35,6 +62,7 @@ export default function Hero() {
   // Fetch Story Types on mount
   useEffect(() => {
     const fetchStoryTypes = async () => {
+      setLoading(true);
       try {
         const response = await fetch(
           "http://62.72.46.248:1337/api/story-types"
@@ -46,6 +74,8 @@ export default function Hero() {
       } catch (err) {
         console.error("Failed to fetch story types:", err);
         setError("Failed to load story types. Please try again later.");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -60,15 +90,15 @@ export default function Hero() {
     setSelectedAge(e.target.value);
   };
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const [stories, setStories] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [stories, setStories] = useState<Story[]>([]);
 
   const fetchFilteredStories = () => {
     fetch(
       `http://62.72.46.248:1337/api/stories?filters[title][$containsi]=${searchQuery}&populate=cover_image`
     )
       .then((response) => response.json())
-      .then((data) => {
+      .then((data: StoriesResponse) => {
         setStories(data.data);
       })
       .catch((error) => {
@@ -86,8 +116,6 @@ export default function Hero() {
     <section>
       <div className="p-4">
         <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6 p-6">
-          {/* Search Input */}
-
           {/* Story Type Dropdown */}
           <div className="w-full sm:w-64 relative">
             <select
@@ -104,15 +132,11 @@ export default function Hero() {
               {loading ? (
                 <option>Loading...</option>
               ) : (
-                storyTypes.map((type) => {
-                  const attrs = type.attributes;
-                  if (!attrs) return null;
-                  return (
-                    <option key={type.id} value={type.id}>
-                      {attrs.emoji || "✨"} {attrs.name}
-                    </option>
-                  );
-                })
+                storyTypes.map((type) => (
+                  <option key={type.id} value={type.id.toString()}>
+                    {type.attributes?.emoji || "✨"} {type.attributes?.name}
+                  </option>
+                ))
               )}
             </select>
             <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
@@ -167,29 +191,63 @@ export default function Hero() {
             </div>
           </div>
           <div className="w-full sm:w-auto flex justify-center px-4">
-            <input
-              type="text"
-              placeholder="🔍 Search stories..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={handleKeyDown}
-              className="w-full sm:w-96 px-5 py-3 rounded-full border border-pink-300 bg-pink-50 
-                 text-pink-700 placeholder:text-pink-400 focus:outline-none focus:ring-2 
-                 focus:ring-pink-300 transition-all shadow-sm"
-            />
+            <div className="relative w-full sm:w-96">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <svg
+                  className="w-5 h-5 text-pink-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                >
+                  <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                </svg>
+              </div>
+              <input
+                type="text"
+                placeholder="Search stories..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
+                className="w-full pl-12 pr-10 py-3 rounded-full border-2 border-pink-300 bg-pink-50 
+                  text-pink-700 placeholder:text-pink-400 focus:outline-none focus:ring-2 
+                  focus:ring-pink-300 focus:border-pink-400 transition-all shadow-md"
+              />
+              {searchQuery && (
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                  <button
+                    onClick={() => setSearchQuery("")}
+                    className="text-pink-400 hover:text-pink-600 focus:outline-none"
+                  >
+                    <svg
+                      className="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
         <div className="">
           {stories.length > 0 ? (
             <div className="flex flex-wrap justify-center gap-6 pt-8 pb-8">
-              {stories.map((story: any) => {
-                const imageUrl = story.cover_image?.url;
-                const title = story.title || "Untitled";
-                const description = story.description || "";
+              {stories.map((story) => {
+                const imageUrl =
+                  story.attributes.cover_image?.data?.attributes?.url;
+                const title = story.attributes.title || "Untitled";
+                const description = story.attributes.description || "";
                 return (
                   <div
-                    className="flex flex-wrap justify-center gap-7 pt-6 pb-6 "
+                    className="flex flex-wrap justify-center gap-7 pt-6 pb-6"
                     key={story.id}
                   >
                     <div className="max-w-[260px] bg-white rounded-lg shadow-lg transition-transform transform hover:scale-101 gap-4 block">
@@ -242,8 +300,6 @@ export default function Hero() {
           {error}
         </div>
       )}
-
-      {/* Filters */}
     </section>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Hero from "./components/hero";
-import Card from "../../components/Card/Card"; // Import Card component
+import StoryCards from "./components/StoryCards"; // Import Card component
 
 export default function Story() {
   const [stories, setStories] = useState([]);
@@ -16,7 +16,7 @@ export default function Story() {
     <main>
       <Hero />
       {stories.length > 0 ? (
-        <Card stories={stories} /> // Pass the fetched stories as a prop to the Card component
+        <StoryCards stories={stories} /> // Pass the fetched stories as a prop to the Card component
       ) : (
         <p>Loading stories...</p>
       )}
