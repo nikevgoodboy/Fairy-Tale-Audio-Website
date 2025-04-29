@@ -1,5 +1,5 @@
 import "./App.css";
-import { ThemeProvider } from "./Layout/ThemeContextProvider";
+import { ThemeProvider } from "./Layout/ThemeProvider";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AppRoute from "./Routes";
