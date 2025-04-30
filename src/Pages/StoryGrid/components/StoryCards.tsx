@@ -30,7 +30,7 @@ const CardComponent: React.FC<CardProps> = ({
         <img
           src={url}
           alt={alt}
-          className="w-full hover:border-blue-500 h-[210px] object-cover rounded-t-lg"
+          className="w-full hover:border-blue-500 h-[210px] object-fit rounded-t-lg"
         />
       </div>
       <div className="p-4">
