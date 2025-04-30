@@ -31,14 +31,14 @@ interface HeroProps {
 
 export default function Hero({ onSearchQueryChange }: HeroProps) {
   const [storyTypes, setStoryTypes] = useState<StoryType[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  // Removed unused loading state
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   // Fetch Story Types on mount
   useEffect(() => {
     const fetchStoryTypes = async () => {
-      setLoading(true); // Start loading
+      // Removed loading state update
       try {
         const response = await fetch(
           "http://62.72.46.248:1337/api/story-types"
@@ -50,8 +50,6 @@ export default function Hero({ onSearchQueryChange }: HeroProps) {
       } catch (err) {
         console.error("Failed to fetch story types:", err);
         setError("Failed to load story types. Please try again later.");
-      } finally {
-        setLoading(false); // End loading
       }
     };
 
@@ -97,6 +95,20 @@ export default function Hero({ onSearchQueryChange }: HeroProps) {
           {error}
         </div>
       )}
+
+      {/* Story Types */}
+      <div className="p-4">
+        <h2 className="text-center text-pink-700 font-bold text-xl mb-4">
+          Story Types
+        </h2>
+        <ul className="list-disc list-inside">
+          {storyTypes.map((storyType) => (
+            <li key={storyType.id} className="text-pink-600">
+              {storyType.attributes.name}
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }

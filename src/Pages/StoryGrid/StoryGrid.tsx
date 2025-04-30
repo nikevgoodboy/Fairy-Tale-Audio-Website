@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Hero from "./components/hero";
 import Card from "./components/StoryCards";
 
 interface StoryType {
   id: number;
-  attributes?: {
-    name: string;
-  };
+
+  name: string;
 }
 
 interface StoryTypeResponse {
@@ -17,6 +16,7 @@ interface AgeRange {
   id: number;
   min_age: number;
   max_age: number;
+  label: string;
 }
 
 interface AgeRangeResponse {
