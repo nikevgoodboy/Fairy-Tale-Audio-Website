@@ -2,49 +2,113 @@ import React, { useState, useEffect } from "react";
 import Hero from "./components/hero";
 import Card from "./components/StoryCards";
 
+interface StoryType {
+  id: number;
+  attributes?: {
+    name: string;
+  };
+}
+
+interface StoryTypeResponse {
+  data: StoryType[];
+}
+
+interface AgeRange {
+  id: number;
+  min_age: number;
+  max_age: number;
+}
+
+interface AgeRangeResponse {
+  data: AgeRange[];
+}
+
 export default function Story() {
   const [stories, setStories] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [storyTypes, setStoryTypes] = useState<StoryType[]>([]);
+  const [ageRanges, setAgeRanges] = useState<AgeRange[]>([]);
+  const [selectedStoryType, setSelectedStoryType] = useState<string>("");
+  const [selectedAgeRange, setSelectedAgeRange] = useState<string>("");
 
-  // Initial fetch for all stories
+  const Base_Url = "http://62.72.46.248:1337";
+
+  // Fetch all story types
   useEffect(() => {
-    fetch("http://62.72.46.248:1337/api/stories?populate=*")
+    fetch(`${Base_Url}/api/story-types`)
       .then((res) => res.json())
-      .then((data) => setStories(data.data))
-      .catch((error) => console.error("Error fetching stories:", error));
+      .then((data: StoryTypeResponse) => setStoryTypes(data.data))
+      .catch((err) => console.error("Story type fetch error:", err));
   }, []);
 
-  // Fetch filtered stories based on search query
-  const fetchFilteredStories = () => {
-    fetch(
-      `http://62.72.46.248:1337/api/stories?filters[title][$containsi]=${searchQuery}&populate=cover_image`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setStories(data.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching stories:", error);
-      });
-  };
+  // Fetch all age ranges
+  useEffect(() => {
+    fetch(`${Base_Url}/api/age-ranges`)
+      .then((res) => res.json())
+      .then((data: AgeRangeResponse) => setAgeRanges(data.data))
+      .catch((err) => console.error("Age range fetch error:", err));
+  }, []);
 
-  // Handle search query change
-  const handleSearchQueryChange = (query: string) => {
-    setSearchQuery(query); // Set search query
-    fetchFilteredStories(); // Fetch stories based on search query
-  };
+  // Fetch filtered stories
+  useEffect(() => {
+    let url = `${Base_Url}/api/stories?filters[title][$containsi]=${searchQuery}&populate=*`;
+
+    if (selectedStoryType) {
+      url += `&filters[story_type][id][$eq]=${selectedStoryType}`;
+    }
+
+    if (selectedAgeRange) {
+      url += `&filters[age_range][id][$eq]=${selectedAgeRange}`;
+    }
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setStories(data.data))
+      .catch((err) => console.error("Story fetch error:", err));
+  }, [searchQuery, selectedStoryType, selectedAgeRange]);
 
   return (
     <main>
-      {/* Hero Section */}
-      <Hero onSearchQueryChange={handleSearchQueryChange} />
+      <Hero onSearchQueryChange={setSearchQuery} />
+      <div className="w-full flex flex-col-12 sm:flex-row items-center justify-center p-6">
+        <div className="space-y-6 sm:space-y-0 sm:space-x-6 flex flex-col sm:flex-row items-center justify-center">
+          {/* Story Type Dropdown */}
+          <select
+            value={selectedStoryType}
+            onChange={(e) => setSelectedStoryType(e.target.value)}
+            className="w-full sm:w-64 bg-pink-100 text-pink-700 rounded-full border-2 border-pink-400 px-6 py-3 shadow-lg focus:outline-none focus:ring-4 focus:ring-pink-300 transition-all duration-200 hover:bg-pink-200"
+          >
+            <option value="">Select Story Type</option>
+            {storyTypes.map((type) => (
+              <option key={type.id} value={type.id.toString()}>
+                {type.name || "Unknown Type"}
+              </option>
+            ))}
+          </select>
 
-      {/* Stories Display */}
-      {stories.length > 0 ? (
-        <Card stories={stories} />
-      ) : (
-        <p className="text-center">Loading stories...</p>
-      )}
+          {/* Age Range Dropdown */}
+          <select
+            value={selectedAgeRange}
+            onChange={(e) => setSelectedAgeRange(e.target.value)}
+            className="w-full sm:w-64 bg-blue-100 text-blue-700 rounded-full border-2 border-blue-400 px-6 py-3 shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-200 hover:bg-blue-200"
+          >
+            <option value="">Select Age Range</option>
+            {ageRanges.map((range) => (
+              <option key={range.id} value={range.id.toString()}>
+                {range.label} years
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div className="mt-6">
+        {stories.length > 0 ? (
+          <Card stories={stories} />
+        ) : (
+          <p className="text-center text-gray-500">Loading stories...</p>
+        )}
+      </div>
     </main>
   );
 }

@@ -26,32 +26,13 @@ export default function HeroSection() {
               {/* Listen Button */}
 
               <a href="/">
-                <button className="flex items-center gap-2 px-5 py-3 bg-[#FF0E4D] text-white text-lg font-semibold rounded-[10px] hover:bg-[#eb3a61] transition duration-300">
-                  <svg
-                    className="w-5 h-5 fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 384 512"
-                  >
-                    <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" />
-                  </svg>
-                  Listen
-                </button>
+                <audio controls>
+                  <source src="" type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio>
               </a>
 
               {/* Favorite Button */}
-
-              <a href="#">
-                <button className="flex items-center gap-2 px-5 py-3 bg-[#fd7a9d] text-white text-lg font-semibold rounded-xl hover:bg-[#eb3a61] transition duration-300">
-                  <svg
-                    className="w-5 h-5 fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 384 512"
-                  >
-                    <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4 13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" />
-                  </svg>
-                  Favorite
-                </button>
-              </a>
             </div>
           </article>
 
