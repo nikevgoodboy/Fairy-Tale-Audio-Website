@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Hero from "./components/hero";
 import Card from "./components/StoryCards";
 
@@ -81,7 +81,7 @@ export default function Story() {
             <option value="">Select Story Type</option>
             {storyTypes.map((type) => (
               <option key={type.id} value={type.id.toString()}>
-                {type.name || "Unknown Type"}
+                {type.attributes?.name || "Unknown Type"}
               </option>
             ))}
           </select>
@@ -95,7 +95,7 @@ export default function Story() {
             <option value="">Select Age Range</option>
             {ageRanges.map((range) => (
               <option key={range.id} value={range.id.toString()}>
-                {range.label} years
+                {range.min_age} - {range.max_age} years
               </option>
             ))}
           </select>

@@ -97,6 +97,21 @@ export default function Hero({ onSearchQueryChange }: HeroProps) {
           {error}
         </div>
       )}
+
+      {/* Story Types */}
+      <div className="p-4">
+        {storyTypes.length > 0 ? (
+          <ul className="list-disc list-inside">
+            {storyTypes.map((storyType) => (
+              <li key={storyType.id} className="text-pink-700">
+                {storyType.attributes.name}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          !loading && <p className="text-center text-gray-500">No stories available.</p>
+        )}
+      </div>
     </section>
   );
 }
