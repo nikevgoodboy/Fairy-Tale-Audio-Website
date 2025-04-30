@@ -23,7 +23,7 @@ const CardComponent: React.FC<CardProps> = ({
 }) => {
   return (
     <Link
-      to={link || "/StoryDetail"}
+      to={link || "#"}
       className="max-w-[260px] bg-white rounded-lg shadow-lg transition-transform transform hover:scale-101 gap-4 block"
     >
       <div className="relative">
@@ -89,7 +89,7 @@ const StoryCards: React.FC<StoryProps> = ({ stories, onFavoriteClick }) => {
             "https://res.cloudinary.com/dsfuhhdez/image/upload/v1745376147/three_little_pigs_4740ba3915.webp"
           }
           alt={story.cover_image?.alt || "Story Image"}
-          link={`/StoryDetail`}
+          link={`/story/${story.documentId}`}
           onFavoriteClick={onFavoriteClick}
         />
       ))}
