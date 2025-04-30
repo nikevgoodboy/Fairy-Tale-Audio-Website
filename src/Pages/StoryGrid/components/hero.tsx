@@ -1,69 +1,18 @@
-import React, { useState, useEffect } from "react";
-
-// Define interfaces for API response
-interface StoryType {
-  id: number;
-  attributes: {
-    name: string;
-    description?: string;
-    emoji?: string;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-  };
-}
-
-interface StoryTypeResponse {
-  data: StoryType[];
-  meta: {
-    pagination: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
-  };
-}
+import React, { useState } from "react";
 
 interface HeroProps {
   onSearchQueryChange: (query: string) => void;
 }
 
 export default function Hero({ onSearchQueryChange }: HeroProps) {
-  const [storyTypes, setStoryTypes] = useState<StoryType[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // Fetch Story Types on mount
-  useEffect(() => {
-    const fetchStoryTypes = async () => {
-      setLoading(true); // Start loading
-      try {
-        const response = await fetch(
-          "http://62.72.46.248:1337/api/story-types"
-        );
-        if (!response.ok) throw new Error(`API error: ${response.status}`);
-        const data: StoryTypeResponse = await response.json();
-        setStoryTypes(data.data);
-        setError(null);
-      } catch (err) {
-        console.error("Failed to fetch story types:", err);
-        setError("Failed to load story types. Please try again later.");
-      } finally {
-        setLoading(false); // End loading
-      }
-    };
-
-    fetchStoryTypes();
-  }, []);
-
   const handleSearchQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value); // Set the search query locally
+    setSearchQuery(e.target.value);
   };
 
   const handleSearchButtonClick = () => {
-    onSearchQueryChange(searchQuery); // Trigger search when button is clicked
+    onSearchQueryChange(searchQuery);
   };
 
   return (
@@ -89,28 +38,6 @@ export default function Hero({ onSearchQueryChange }: HeroProps) {
             </button>
           </div>
         </div>
-      </div>
-
-      {/* Error */}
-      {error && (
-        <div className="text-center p-4 text-red-500 font-semibold">
-          {error}
-        </div>
-      )}
-
-      {/* Story Types */}
-      <div className="p-4">
-        {storyTypes.length > 0 ? (
-          <ul className="list-disc list-inside">
-            {storyTypes.map((storyType) => (
-              <li key={storyType.id} className="text-pink-700">
-                {storyType.attributes.name}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          !loading && <p className="text-center text-gray-500">No stories available.</p>
-        )}
       </div>
     </section>
   );

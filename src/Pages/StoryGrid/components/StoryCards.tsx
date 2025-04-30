@@ -70,6 +70,7 @@ interface StoryProps {
     id: number;
     title: string;
     description: string;
+    documentId: string;
     cover_image?: { url: string; alt: string };
   }>;
   onFavoriteClick?: (id: number) => void;
