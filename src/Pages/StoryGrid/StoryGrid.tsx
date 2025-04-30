@@ -95,7 +95,7 @@ export default function Story() {
             <option value="">Select Age Range</option>
             {ageRanges.map((range) => (
               <option key={range.id} value={range.id.toString()}>
-                {range.min_age} - {range.max_age} years
+                {range.label} years
               </option>
             ))}
           </select>
