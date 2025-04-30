@@ -81,7 +81,7 @@ export default function Story() {
             <option value="">Select Story Type</option>
             {storyTypes.map((type) => (
               <option key={type.id} value={type.id.toString()}>
-                {type.attributes?.name || "Unknown Type"}
+                {type.name || "Unknown Type"}
               </option>
             ))}
           </select>
